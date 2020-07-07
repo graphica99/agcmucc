@@ -1,13 +1,13 @@
-// const app = require('./app');
+const dotenv = require('dotenv')
+dotenv.config();
 var MongoClient = require("mongodb").MongoClient;
-var url = "mongodb://localhost:27017/agcm";
 
-MongoClient.connect(url, function (err, db) {
+MongoClient.connect(process.env.CONNECTIONSTRING, function (err, db) {
   if (err) throw err;
   console.log("Database created!");
   let dbo = db;
   module.exports = dbo;
 
   let app = require("./app");
-  app.listen(3000);
+  app.listen(process.env.PORT);
 });
