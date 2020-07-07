@@ -1,1 +1,1 @@
-web: node run dev
+web:node run dev
