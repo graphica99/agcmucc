@@ -1,0 +1,41 @@
+<%- include('../includes/header') %>
+<%- include('../includes/nav') %>
+<section class="breadcrumb_area br_image">
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">Event Details</h2>
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Event Details</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<!-- timer -->
+<%- include('../includes/timer') %>
+<!-- timer -->
+<!--================Breadcrumb Area =================-->
+<section class="event_details_area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <img class="img-fluid" src="/eventUploads/<%=eventSingle.image%>" alt="">
+            </div>
+            <div class="col-md-4 align-self-center">
+                <ul class="list_style sermons_category event_category">
+                    <li><i class="lnr lnr-user"></i><%=eventSingle.date%></li>
+                    <li><i class="lnr lnr-location"></i><%=eventSingle.location%></li>
+                    <li><i class="lnr lnr-apartment"></i><%=eventSingle.time%> to <%=eventSingle.time_end%> </li>
+                </ul>
+            </div>
+            <div class="col-md-12 event_details">
+                <a href="#"><h2 class="event_title"><%=eventSingle.title%></h2></a>
+                <p><%=eventSingle.details%></p> <br><br>
+                <a href="/event" class="btn_hover">Back</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<%- include('../includes/footer') %>

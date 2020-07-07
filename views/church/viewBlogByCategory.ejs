@@ -1,0 +1,145 @@
+<%- include('../includes/header') %>
+<%- include('../includes/nav') %>
+
+<!--================Banner Area =================-->
+
+<!--================Blog Categorie Area =================-->
+
+<!--================Blog Categorie Area =================-->
+
+<!--================Blog Area =================-->
+<section class="blog_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="blog_left_sidebar">
+                    <%pagination.posts.forEach(function(post){%>
+                    <article class="row blog_item">
+                       <div class="col-md-3">
+                           <div class="blog_info text-right">
+                                <div class="post_tag">
+                                    <a href="#"><%=post.category%></a>
+                                </div>
+                                <ul class="blog_meta list_style">
+                                    <li><a href="#"><%=post.arthur%><i class="lnr lnr-user"></i></a></li>
+                                    <li><a href="#"><%=post.date.getFullYear()%>/<%=post.date.getMonth()+1%>/<%=post.date.getDate()%><i class="lnr lnr-calendar-full"></i></a></li>
+                                    <li><a href="#">06 Comments(work on this when doing the comment)<i class="lnr lnr-bubble"></i></a></li>
+                                </ul>
+                            </div>
+                       </div>
+                        <div class="col-md-9">
+                            <div class="blog_post">
+                                <img src="/postUploads/<%=post.image%>" alt="">
+                                <div class="blog_details">
+                                    <a href="blog-single.html"><h2><%=post.title%></h2></a>
+                                    <p><%-post.details%></p>
+                                    <a href="/blog-details/<%=post._id%>" class="view_btn button_hover">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                   <%})%>
+                    <nav class="blog-pagination justify-content-center d-flex">
+                        <ul class="pagination">
+               
+                            <%if(pagination.pages > 0){%>
+                                <% if (pagination.current == 1) { %>
+                                    <li class="page-item active">
+                                        <a href="/viewBlogByCategory/Technology/1" class="page-link" aria-label="Previous">
+                                            First
+                                        </a>
+                                    </li> 
+                                <% } else { %>
+                                    <!-- <li class="page-item"><a  class="page-link" href="/blog/1"></a></li> -->
+                                <% } %>
+                                <% var i = (Number(pagination.current) > 5 ? Number(pagination.current) - 4 : 1) %>
+                                <% if (i !== 1) { %>
+                                    <li class="page-item"><a class="page-link" >...</a></li>
+                                <% } %>
+                                <% for (; i <= (Number(pagination.current) + 4) && i <= pagination.pages; i++) { %>
+                                    <% if (i == pagination.current) { %>
+                                        <li class="page-item active"><a class="page-link"><%= i %></a></li>
+                                    <% } else { %>
+                                        <li class="page-item "><a class="page-link" href="/viewBlogByCategory/Technology/<%= i %>"><%= i %></a></li>
+                                    <% } %>
+                                    <% if (i == Number(pagination.current) + 4 && i < pagination.pages) { %>
+                                        <li class="disabled page-item"><a class="page-link"> ...</a></li>
+                                    <% } %>
+                                <% } %>
+                                <% if (pagination.current == pagination.pages) { %>
+                                    <li class="page-item disabled">
+                                        <a href="#" class="page-link" aria-label="Next">
+                                            Last
+                                            <!-- <span aria-hidden="true">
+                                                <span class="lnr lnr-chevron-right"></span>
+                                            </span> -->
+                                        </a>
+                                    </li>
+                                <% } else { %>
+                                    <li class="page-item"><a class="page-link" href="/viewBlogByCategory/Technology/<%= pagination.pages %>">Last</a></li>
+                                <% } %>                            
+                            <%}%>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget search_widget">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search Posts">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
+                            </span>
+                        </div><!-- /input-group -->
+                        <div class="br"></div>
+                    </aside>
+                   
+                    <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title">Popular Posts</h3>
+                      <%popularPost.forEach(function(popularPost){%>
+                        <div class="media post_item">
+                            <img width="130px" height="70px" src="/postUploads/<%=popularPost.image%>" alt="post">
+                            <div class="media-body">
+                                <a href="/blog-details/<%=popularPost._id%>"><h3><%=popularPost.title%></h3></a>
+                                <p><%=popularPost.date%></p>
+                                <p>2 hours ago</p>
+                            </div>
+                        </div> 
+                       <%})%>
+                        <div class="br"></div>
+                    </aside>
+                    <aside class="single_sidebar_widget ads_widget">
+                        <a href="#"><img class="img-fluid" src="image/blog/add.jpg" alt=""></a>
+                        <div class="br"></div>
+                    </aside>
+                    <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title">Post Catgories</h4>
+                        <ul class="list_style cat-list">
+                          <%allCat.forEach(function(allCat){%>
+                            <li>
+                                <a href="/viewBlogByCategory/<%=allCat.postCategory%>/<%=allCat._id%>" class="d-flex justify-content-between">
+                                    <p><%=allCat.postCategory%></p>
+                                    <p>00</p>
+                                </a>
+                            </li>
+                            <%})%>												
+                        </ul>
+                        <div class="br"></div>
+                    </aside>
+                    <aside class="single-sidebar-widget tag_cloud_widget">
+                        <h4 class="widget_title">Tag Categories</h4>
+                        <ul class="list_style">
+                            <%allCat.forEach(function(allCat){%>
+                                <li><a href="/viewBlogByCategory/<%=allCat.postCategory%>/<%=allCat._id%>"><%=allCat.postCategory%></a></li>
+                                <%})%>		 
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Blog Area =================-->
+
+<%- include('../includes/footer') %>

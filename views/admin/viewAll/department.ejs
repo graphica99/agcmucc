@@ -1,0 +1,78 @@
+<%- include('../../admin-include/header') %>
+<%- include('../../admin-include/sideBar') %>
+<%- include('../../admin-include/nav') %>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Department</h1>
+    <p class="mb-4">This table displays all the departments in AGCM</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+
+            <% success.forEach(function(message){ %>
+            <div class="alert alert-success text-center"><%= message %></div>
+            <% }) %>
+
+            <% info.forEach(function(info){ %>
+            <div class="alert alert-danger text-center"><%= info %></div>
+            <% }) %>
+
+            <h6 class="m-0 font-weight-bold text-primary">Sermon's Table</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Dept' Name</th>
+                            <th>Dept' Head</th>
+                            <th>Mission</th>
+                            <th>Image</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Dept'Name</th>
+                            <th>Dept' Head</th>
+                            <th>Mission</th>
+                            <th>Image</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <% department.forEach(function(department){    
+                        %>
+                        <tr>
+                            <td><%=department.name%></td>
+                            <td><%=department.department%></td>
+                            <td><%=department.name%>...</td>
+                            <td><img width="140px" height="60px" src="/departmentUploads/<%=department.image%>" alt="<%=department.title%>">
+                            </td>
+                            </td>
+                            <td><a href="/admin/editDepartment/<%=department._id%>" class="btn btn-primary">Edit</a></td>
+                            <td>
+
+                                <a class="btn btn-danger" href="/admin/deleteDepartment/<%=department._id%>">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+<!-- delete department Model -->
+<%- include('../../admin-include/footer') %>

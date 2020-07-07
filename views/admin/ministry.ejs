@@ -1,0 +1,53 @@
+<%- include('../admin-include/header') %>
+<%- include('../admin-include/sideBar') %>
+<%- include('../admin-include/nav') %>
+
+<!-- Content Wrapper -->
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- 404 Error Text -->
+            <div class="text-center">
+                <div class="section-top-border">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <% success.forEach(function(message){ %>
+                                <div class="alert alert-success text-center"><%= message %></div>
+                                <% }) %>
+                          <h3 class="mb-30 title_color">Add Department/Ministry</h3>
+                            <form action="/admin/department" method="POST" enctype="multipart/form-data">
+                                <div class="mt-10">
+                                    <input  class="form-control" type="text" name="name" placeholder="department name" onfocus="this.placeholder = 'department name'" onblur="this.placeholder = 'name'" required class="single-input">
+                                </div>
+                                <div class="mt-10">
+                                    <input class="form-control" type="text" name="department" placeholder="Department head" onfocus="this.placeholder = 'department head'" onblur="this.placeholder = 'department head'" required class="single-input">
+                                </div>
+                                <div class="mt-10">
+                                    <textarea class="form-control mb-10" rows="5" name="details" placeholder="Mission/vision of the department" onfocus="this.placeholder = ''" onblur="this.placeholder = 'details'" required=""></textarea>
+                                </div>
+                                <div class="mt-10">
+                                    <input  class="form-control" type="file" name="file" placeholder="Insert an Image related to the sermon" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Insert an Image related to the sermon'" required class="single-input">
+                                </div>
+                                <div class="button-group-area mt-40">
+                                    <button type="submit" class="genric-btn primary circle">Add department</button>
+                                    <a href="/admin/viewAllDepartment" class="genric-btn danger circle">view all Department</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+<%- include('../admin-include/footer') %>

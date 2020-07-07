@@ -1,0 +1,62 @@
+<%- include('../../admin-include/header') %>
+<%- include('../../admin-include/sideBar') %>
+<%- include('../../admin-include/nav') %>
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+    <!-- Main Content -->
+    <div id="content">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <!-- 404 Error Text -->
+            <div class="text-center">
+                <div class="section-top-border">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <% success.forEach(function(message){ %>
+                                <div class="alert alert-success text-center"><%= message %></div>
+                                <% }) %>
+                          <h3 class="mb-30 title_color">Edit Executives</h3>
+                            <form action="/admin/editExecutive/<%= data._id%>" method="POST" enctype="multipart/form-data">
+                                <div class="mt-10">
+                                    <input  class="form-control" type="text" name="name" placeholder="name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'name'" required class="single-input" value="<%= data.name%>">
+                                </div>
+                                <div class="mt-10">
+                                    <input class="form-control" type="text" name="portfolio" placeholder="Portfolio" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Portfolio'" required class="single-input" value="<%= data.portfolio%>">
+                                </div>
+                                <div class="mt-10">
+                                    <input class="form-control" type="text" name="contact" placeholder="contact" onfocus="this.placeholder = ''" onblur="this.placeholder = 'contact'" required class="single-input" value="<%= data.contact%>">
+                                </div>
+                                <div class="mt-10">
+                                    <input class="form-control" type="file" name="file" required>
+                                </div>
+                                <div class="input-group-icon mt-10" class="">
+                                  
+                                    <div class="form-select" id="default-select2">
+                                        <select name="yearGroup" class="form-control">
+                                            <option value="<%=data.yearGroup%>"><%=data.yearGroup%></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="button-group-area mt-40">
+                                    <button type="submit" class="genric-btn primary circle">Edit Executive</button>
+                                    <a href="/admin/viewAllExecutive" class="genric-btn danger circle">Cancle</a>
+                                </div>
+                            </form>
+                            <br><br>
+
+                            <!-- add year group -->
+                            
+                            <!-- add year group -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+<%- include('../../admin-include/footer') %>

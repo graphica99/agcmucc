@@ -1,0 +1,60 @@
+<header class="header_area">
+    <div class="header_top">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-5">
+                    <ul class="nav social_icon mr-2">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+
+                        <li><a href="#"><i class="fa fa-book"></i></a></li>
+                        <!-- <div class="top_btn d-flex justify-content-end ">
+                            <a href="">Books</a>
+                        </div> -->
+                    </ul>
+                   
+                </div>
+                <div class="col-sm-6 col-7">
+                    <div class="top_btn d-flex justify-content-end ">
+                        <%if(user){%>
+                            <a href="/viewAddPost" class="mr-2">My Account</a> 
+                            <a href="/logOut"  style="color:orange">Logout</a>
+                        <%}else{%>
+                            <a href="/login">Login</a>
+                        <%}%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <a class="navbar-brand logo_h" href="/"><img src="image/Logo.png" alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                <ul class="nav navbar-nav menu_nav ml-auto">
+                    <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/ministry">Minisrtries</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/sermon">Sermons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/gallary">Gallery</a></li>    
+                    <li class="nav-item"><a class="nav-link" href="/executive">Executives</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/event">Event</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
+    
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+                </ul>
+               
+            </div>
+        </div>
+    </nav>
+</header>

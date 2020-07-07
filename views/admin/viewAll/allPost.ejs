@@ -1,0 +1,97 @@
+<%- include('../../admin-include/header') %>
+<%- include('../../admin-include/sideBar') %>
+<%- include('../../admin-include/nav') %>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Events</h1>
+    <p class="mb-4">This table displays all the event in AGCM</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+
+            <% success.forEach(function(message){ %>
+            <div class="alert alert-success text-center"><%= message %></div>
+            <% }) %>
+
+            <% info.forEach(function(info){ %>
+            <div class="alert alert-danger text-center"><%= info %></div>
+            <% }) %>
+
+            <h6 class="m-0 font-weight-bold text-primary">Post Table</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Authur</th>
+                            <th>Details</th>
+                            <th>Date</th>
+                            <th>Image</th>
+                            <th>Approve</th>
+                            <th>View</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Authur</th>
+                            <th>Details</th>
+                            <th>Date</th>
+                            <th>Image</th>
+                            <th>Approve</th>
+                            <th>View</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <% post.forEach(function(post){ 
+                           %>
+                        <tr>
+                            <td><%=post.title%></td>
+                            <td><%=post.category%></td>
+                            <td><%=post.arthur%></td>
+                         
+                            <td><%-post.details.substring(0,150)%>....</td>
+                         
+                            <td><%=post.date.getFullYear()%>/<%=post.date.getMonth()+1%>/<%=post.date.getDate()%> - <%=post.date.getHours()%>:<%=post.date.getMinutes()%></td>
+                            <td><img width="140px" height="60px" src="/postUploads/<%=post.image%>" alt="<%=post.title%>">
+                            </td>
+                            <td>
+                                <%if(post.approvePost === 'true'){%>
+                                <input data-id="<%=post._id%>" type="checkbox" name="approvePost" checked>
+                                <%}else{%>
+                                <input data-id="<%=post._id%>" type="checkbox" name="approvePost">
+                                <%}%> 
+                            </td>
+                            <td>
+                                <a class="btn btn-success" href="/admin/viewPostToApprove/<%=post._id%>">
+                                   View 
+                                </a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+<!-- delete Sermon Model -->
+<script>
+String.prototype.trimEllip = function (length) {
+  return this.length > length ? this.substring(0, length) + "..." : this;
+}
+</script>
+
+<%- include('../../admin-include/footer') %>

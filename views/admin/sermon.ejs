@@ -1,0 +1,65 @@
+<%- include('../admin-include/header') %>
+<%- include('../admin-include/sideBar') %>
+<%- include('../admin-include/nav') %>
+
+<!-- Content Wrapper -->
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- 404 Error Text -->
+            <div class="text-center">
+                <div class="section-top-border">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <% success.forEach(function(message){ %>
+                            <div class="alert alert-success text-center"><%= message %></div>
+                            <% }) %>
+                            <h3 class="mb-30 title_color">Add Sermon</h3>
+                            <form action="/admin/sermon" method="post" enctype="multipart/form-data">
+                                <div class="mt-10">
+                                    <input class="form-control" type="text" name="title" placeholder="title"
+                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'title'" required
+                                        class="single-input">
+                                </div>
+                                <div class="mt-10">
+                                    <input class="form-control" type="text" name="Name" placeholder="Name of Speaker"
+                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name of Speaker'"
+                                        required class="single-input">
+                                </div>
+                                <div class="mt-10">
+                                    <input class="form-control" type="date" name="date" placeholder="date"
+                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'date'"
+                                        required class="single-input">
+                                </div>
+                                <div class="mt-10">
+                                    <textarea  class="form-control mb-10" rows="5" name="message" placeholder="Messege"
+                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"
+                                        required=""></textarea>
+                                </div>
+                                <div class="mt-10">
+                                    <input class="form-control" type="file" name="file" required>
+                                </div>
+                                <div class="button-group-area mt-40">
+                                    <button type="submit" class="genric-btn primary circle">Add sermon</button>
+
+                                    <a href="/admin/viewAllSermon" class="genric-btn danger circle">view all sermon</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+   
+    <%- include('../admin-include/footer') %>

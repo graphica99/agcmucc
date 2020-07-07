@@ -1,0 +1,43 @@
+<%- include('../includes/header') %>
+
+        <!--================Blog Area =================-->
+        <section class="blog_area single-post-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 posts-list">
+                        <div class="single-post row">
+                            <div class="col-lg-12">
+                                <div class="feature-img">
+                                    <img class="img-fluid" src="/postUploads/<%=singlePost.image%>" alt="">
+                                </div>									
+                            </div>
+                            <div class="col-lg-3  col-md-3">
+                                <div class="blog_info text-right">
+                                    <div class="post_tag">
+                                        <a href="#"><%=singlePost.category%> </a>
+                                    </div>
+                                    <ul class="blog_meta list_style">
+                                        <li><a href="#"><%=singlePost.arthur%><i class="lnr lnr-user"></i></a></li>
+                                        <li><a href="#"><%=singlePost.date%><i class="lnr lnr-calendar-full"></i></a></li> 
+                                    </ul>
+                                  
+                                </div>
+                            </div>
+                            <div class="col-lg-9 col-md-9 blog_details">
+                                <h2><%=singlePost.title%></h2>
+                                <p class="excert">
+                                    <%-singlePost.details%>
+                                </p>
+                            </div>
+                        </div>
+                        
+                       
+        
+                    </div>
+                </div>
+                <a href="/admin/allPost" class="btn btn-primary btn-block">Back</a>
+            </div>
+        
+        </section>
+        <!--================Blog Area =================-->
+   

@@ -1,0 +1,52 @@
+<%- include('../admin-include/header') %>
+<%- include('../admin-include/sideBar') %>
+<%- include('../admin-include/nav') %>
+
+<!-- Content Wrapper -->
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- 404 Error Text -->
+            <div class="text-center">
+                <div class="section-top-border">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <% success.forEach(function(message){ %>
+                            <div class="alert alert-success text-center"><%= message %></div>
+                            <% }) %>
+                            <% info.forEach(function(info){ %>
+                            <div class="alert alert-success text-center"><%= info %></div>
+                            <% }) %>
+                           
+                            <h3 class="mb-30 title_color">Add Post Category</h3>
+                            <!-- <p>You cant add an year group(contact the publicity department to enable it)</p> -->
+                            <form action="/admin/addPostCategory" method="POST">
+                                <div class="mt-10">
+                                    <input class="form-control" type="text" name="postCategory" placeholder=" eg Religion"
+                                        onfocus="this.placeholder = ''" onblur="this.placeholder = ' eg Religion'"
+                                        required class="single-input" >
+                                </div>
+                                <div class="button-group-area mt-40">
+                                    <button type="submit" class="genric-btn primary circle"  >Add</button>
+                                    <a href="/admin/viewAllPostCategory" class="genric-btn danger circle"  >View All Post Category</a>
+                                </div>
+                            </form>
+                            <!-- add year group -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+    <%- include('../admin-include/footer') %>

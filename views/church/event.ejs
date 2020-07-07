@@ -1,0 +1,41 @@
+<%- include('../includes/header') %>
+<%- include('../includes/nav') %>
+<section class="breadcrumb_area br_image">
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">Upcoming Events</h2>
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Events</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->
+<!--================Event Date Area =================-->
+<%- include('../includes/timer') %>
+<!--================Event Date Area =================-->
+<!--================Event Blog Area=================-->
+<section class="event_blog_area section_gap">
+    <div class="container">
+        <div class="row event_two">
+            <% dataAll.forEach(function(dataAll){%>
+            <div class="col-lg-4 col-sm-6">
+                <div class="event_post">
+                    <img src="/eventUploads/<%=dataAll.image%>" alt="">
+                    <a href="#">
+                        <h2 class="event_title"><%=dataAll.title%></h2>
+                    </a>
+                    <ul class="list_style sermons_category event_category">
+                        <li><i class="lnr lnr-user"></i><%=dataAll.date%></li>
+                        <li><i class="lnr lnr-location"></i><%=dataAll.location%></li>
+                        <li><i class="lnr lnr-apartment"></i><%=dataAll.time%> to <%=dataAll.time_end%> </li>
+                    </ul>
+                    <a href="/event-details/<%=dataAll._id%>" class="btn_hover">View Details</a>
+                </div>
+            </div>
+            <%})%>
+        </div>
+    </div>
+</section>
+<%- include('../includes/footer') %>

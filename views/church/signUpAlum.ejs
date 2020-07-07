@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SB Admin 2 - Register</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+  <div class="container  col-sm-8">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-lg-12 col-sm-12">
+            <div class="p-5">
+              <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">AGCM UCC LOGO</h1>
+                <h3 class="h4 text-gray-900 mb-4">Create an Account!</h3>
+              </div>
+              <form action="/signUp" method="POST" class="user">
+                <% error.forEach(function(error){ %>
+                    <div class="alert alert-danger text-center"><%= error %></div>
+                <% }) %>
+                <% success.forEach(function(success){ %>
+                    <div class="alert alert-danger text-center"><%= success %></div>
+                <% }) %>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="form-control " id="exampleFirstName" placeholder="First Name" name="firstName" required>
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control " id="exampleLastName" placeholder="Last Name" name="lastName" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <input type="text" class="form-control " id="exampleFirstName" placeholder="Contact" name="contact" required>
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="email" class="form-control " id="exampleLastName" placeholder="email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <label for="">Entry Year </label>
+                    <input type="month"  class="form-control " id="exampleFirstName" placeholder="Entry Year" name="entryYear" required>
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="">Completion Year </label>
+                    <input type="hidden" name="isAlum" value="true">
+                    <input type="month" class="form-control " id="exampleLastName" placeholder="Ending Year" name="endingYear" required>
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="sel1">Date of Birth(This will be used to wish you on your birthday. Optional!):</label>
+                <input type='date' class="form-control " id="exampleLastName" placeholder="Ending Year" name="doB" required>
+              <!-- <input type="email" class="form-control " id="exampleInputEmail" placeholder="Email Address"> -->
+            </div>
+              <div class="form-group">
+                <label for="sel1">Number of years you studied:</label>
+                <select class="form-control " id="sel1" name='yearOfStudy' required>
+                  <option value="2">2</option>
+                  <option value="4">4</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value='8'>8</option>
+                </select>
+              <!-- <input type="email" class="form-control " id="exampleInputEmail" placeholder="Email Address"> -->
+            </div>
+                <div class="form-group">
+                    <label for="sel1">Number of Years since you completed:</label>
+                    <select class="form-control " id="sel1" name='level' required>
+                      <option value="1 year">1 year</option>
+                      <option value="2-5 years">2 - 5 year</option>
+                      <option value="5-10 years">5 - 10 years</option>
+                      <option value="10-20 years">10 - 20 years</option>
+                      <option value="20+ years">20+ years</option>
+                    </select>
+                  <!-- <input type="email" class="form-control " id="exampleInputEmail" placeholder="Email Address"> -->
+                </div>
+                <div class="form-group">
+                  <label for="sel1">Gender:</label> <br>
+                  <div class="form-check-inline">
+                    <label class="form-check-label pr-5">
+                      <input type="radio" class="form-check-input " value="male" name="gender" required>Male 
+                    </label>
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" value="female" name="gender" required>Female
+                    </label>
+                  </div>
+                <!-- <input type="email" class="form-control " id="exampleInputEmail" placeholder="Email Address"> -->
+              </div>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="form-control " id="exampleInputPassword" placeholder="Program of study" name="program" required>
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control " id="exampleRepeatPassword" placeholder="Place of residence(Region/district)" name="residence" required>
+                  </div>
+                </div>
+              <div class="form-group">
+                    <label for="sel1">Department in Agcm:
+                        (Atmost 2 Department)
+                    </label> <br>
+                    <%department.forEach(function(department){ %> 
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                          <input type="checkbox" class="form-check-input" value="<%=department.name%>" name="department"><%=department.name%>
+                        </label>
+                      </div>
+                      <% }) %>
+              </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <input type="password" class="form-control " id="exampleInputPassword" placeholder="Password" name="firstPassword" required>
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="password" class="form-control " id="exampleRepeatPassword" placeholder="Repeat Password" name="secondPassword" required>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-user btn-block">
+                    Register
+                  </button>
+                  <a href="/" class="btn btn-danger btn-user btn-block">Cancle</a>
+              </form>
+              <hr>
+              <div class="text-center">
+                <a class="small" href="forgot-password.html">Forgot Password?</a>
+              </div>
+              <div class="text-center">
+                <a class="small" href="/logIn">Already have an account? Login!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>

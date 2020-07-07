@@ -1,0 +1,96 @@
+<%- include('../includes/header') %>
+<%- include('../includes/nav') %>
+<section class="breadcrumb_area br_image">
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">Sermons</h2>
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Sermons</li>
+            </ol>
+        </div>
+    </div> 
+</section>
+<!--================Breadcrumb Area =================-->
+
+<!--================Sermons work Area =================-->
+<section class="sermons_work_area section_gap">
+    <div class="container">
+        <div class="section_title text-center">
+            <h2>Sermons This Week</h2>
+            <p>Assemblies of God Campus ministry, University of Cape coast</p>
+        </div>
+        <div class="sermons_slider owl-carousel">
+            <div class="item row">
+                <div class="col-lg-8">
+                    <div class="sermons_image">
+                        <img src="/sermonUploads/<%=sermonOfTheWeek.imagename%>" alt="">
+                        <p><%=sermonOfTheWeek.message%></p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="sermons_content">
+                        <h3 class="title_color"><%=sermonOfTheWeek.title%></h3>
+                        <ul class="list_style sermons_category">
+                            <li><i class="lnr lnr-user"></i><span>Speaker: </span><%=sermonOfTheWeek.Name%></li>
+                            <li><i class="lnr lnr-calendar-full"></i><span>Date:</span><%=sermonOfTheWeek.date%></li>
+                            
+                        </ul>
+                        <a href="/sermon-details/<%=sermonOfTheWeek._id%>" class="btn_hover">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Sermons work Area=================-->
+
+<!--================Event Blog Area=================-->
+<!-- limit the sermon page to some number -->
+<section class="event_blog_area section_gap">
+    <div class="container">
+        <div class="row">
+            <%sermon.forEach(function(sermon){%>
+            <div class="col-md-4">
+                <div class="event_post">
+                    <img src="/sermonUploads/<%=sermon.imagename%>" alt="">
+                    <a href="#"><h2 class="event_title"><%=sermon.title%></h2></a>
+                    <ul class="list_style sermons_category">
+                        <li><i class="lnr lnr-user"></i><%=sermon.Name%></li>
+                        <li><i class="lnr lnr-calendar-full"></i><%=sermon.date%></li>
+                    </ul>
+                    <a href="/sermon-details/<%=sermon._id%>" class="btn_hover">View Details</a>
+                </div>
+            </div>
+            <%})%>
+<!-- 
+            <div class="col-md-4">
+                <div class="event_post">
+                    <img src="image/blog2.jpg" alt="">
+                    <a href="#"><h2 class="event_title">Spread Happyness to world</h2></a>
+                    <ul class="list_style sermons_category">
+                        <li><i class="lnr lnr-user"></i>Saturday, 5th may, 2018</li>
+                        <li><i class="lnr lnr-apartment"></i>Rocky beach Church</li>
+                        <li><i class="lnr lnr-location"></i>Santa monica, Los Angeles, USA</li>
+                    </ul>
+                    <a href="#" class="btn_hover">View Details</a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="event_post">
+                    <img src="image/blog3.jpg" alt="">
+                    <a href="#"><h2 class="event_title">Spreading Light to world</h2></a>
+                    <ul class="list_style sermons_category">
+                        <li><i class="lnr lnr-user"></i>Saturday, 5th may, 2018</li>
+                        <li><i class="lnr lnr-apartment"></i>Rocky beach Church</li>
+                        <li><i class="lnr lnr-location"></i>Santa monica, Los Angeles, USA</li>
+                    </ul>
+                    <a href="#" class="btn_hover">View Details</a>
+                </div>
+            </div> -->
+
+        </div>
+    </div>
+</section>
+<%- include('../includes/footer') %>

@@ -1,0 +1,40 @@
+<%- include('../includes/header') %>
+<%- include('../includes/nav') %>
+<section class="breadcrumb_area br_image">
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">Event Details</h2>
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Event Details</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->
+<section class="event_details_area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <img class="img-fluid" src="/sermonUploads/<%=sermonSingle.imagename%>" alt="">
+            </div>
+            <div class="col-md-4 align-self-center">
+                <ul class="list_style sermons_category event_category">
+                    <li><i class="lnr lnr-calendar-full"></i><%=sermonSingle.date%></li>
+                    <li><i class="lnr lnr-user"></i>By: <%=sermonSingle.Name%></li>
+                    <!-- <li><i class="lnr lnr-location"></i>Santa monica, Los Angeles, USA</li> -->
+                </ul>
+            </div>
+            <div class="col-md-12 event_details">
+                <a href="#"><h2 class="event_title"><%=sermonSingle.title%></h2></a>
+                <p><%=sermonSingle.message%></p> <br><br>
+                <a href="/sermon" class="btn_hover">Back</a>
+            </div>
+           
+           
+        </div>
+    </div>
+</section>
+
+
+<%- include('../includes/footer') %>

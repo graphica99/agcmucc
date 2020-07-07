@@ -1,0 +1,53 @@
+<%- include('../includes/header') %>
+<%- include('../includes/nav') %>
+<section class="breadcrumb_area br_image">
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">Executive Page</h2>
+            <ol class="breadcrumb">
+                <li class="active">Executive Page</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<section class="event_blog_area section_gap">
+    <div class="container">
+        <div class="form-group">
+            <label for="label" id="label">Select Year Group:</label>
+            <select class="form-control"  id='yearGroupSel' style="display: block;">
+                <%year.forEach(function(yeargroup){ %>
+                    <option id="optionSel" value="<%=yeargroup.yearGroup%>"><%=yeargroup.yearGroup%></option>
+                <%})%>
+            </select>
+          </div>
+    </div>
+
+  
+</section>
+
+<section class="team_area mb-5">
+    <div class="container">
+        <div class="section_title text-center" id="header">
+            <h2>All executives of the year 2016/2017 AGCM UCC</h2>
+        </div>
+        <div class="row mb_30" id="executiveSection">
+            <%yearGroup.forEach(function(yearGroup){%>
+            <div class="col-md-3 col-sm-3" >
+                <div class="team_item">
+                    <div class="team_img ">
+                        <img src="/executiveUploads/<%=yearGroup.image%>" alt="<%=yearGroup.name%>" class="" style="width: 150px;
+                        height: 150px;
+                        border-radius: 50%;">
+                    </div>
+                    <div class="content">
+                        <h3><%=yearGroup.name%></h3>
+                        <p><%=yearGroup.portfolio%></p>
+                    </div>
+                </div>
+            </div>
+            <%})%>
+        </div>
+    </div>
+</section>
+
+<%- include('../includes/footer') %>

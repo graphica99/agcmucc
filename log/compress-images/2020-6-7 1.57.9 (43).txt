@@ -1,0 +1,7 @@
+File from: [C:\Users\Albert\Desktop\church-node\asset\executiveUploads\.{jpg,JPG,jpeg,JPEG,png,svg,gif}]
+
+File to: [C:\Users\Albert\Desktop\church-node\asset\try\C:\Users\Albert\Desktop\church-node\asset\executiveUploads\.{jpg,JPG,jpeg,JPEG,png,svg,gif}]
+
+Compression algorithm: [-]
+
+Description: File does not exist!

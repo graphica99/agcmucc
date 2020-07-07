@@ -1,0 +1,59 @@
+<%- include('../../admin-include/header') %>
+<%- include('../../admin-include/sideBar') %>
+<%- include('../../admin-include/nav') %>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">About Page</h1>
+    <p class="mb-4">This is the about page in AGCM UCC</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+
+            <% success.forEach(function(message){ %>
+            <div class="alert alert-success text-center"><%= message %></div>
+            <% }) %>
+
+            <% info.forEach(function(info){ %>
+            <div class="alert alert-danger text-center"><%= info %></div>
+            <% }) %>
+
+            <h6 class="m-0 font-weight-bold text-primary">Sermon's Table</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Message</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Message</th>
+                            <th>Edit</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <% About.forEach(function(About){    
+                        %>
+                        <tr>
+                            <td><%=About.details%></td>
+                            <td><a href="/admin/editAbout/<%=About._id%>" class="btn btn-primary">Edit</a></td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+<!-- delete Announcement Model -->
+<%- include('../../admin-include/footer') %>

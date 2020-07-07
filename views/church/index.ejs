@@ -1,0 +1,143 @@
+<%- include('../includes/header') %>
+<%- include('../includes/nav') %>
+
+<section class="banner_area d-flex text-center">
+    <div class="container align-self-center">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="banner_content">
+                   
+					<%if(user){%>
+						<h6>AGCM UCC</h6>
+						<h1>Keep faith always</h1>
+						<p>Are you a content Creator <%=user.firstName.toUpperCase()%> <%=user.lastName.toUpperCase()%>? <br>Click on the link below and become a Creator</p>
+						<a href="/viewAddPost" class="btn_hover btn_hover_two">Create a Post</a>
+					<%}else{%>
+						<h6>AGCM UCC</h6>
+						<h1>Keep faith always</h1>
+						<p>Welcome to Assemblies of God Campus Ministry, University of Cape Coast<br> Are you a member ? Sign up in the link below</p>
+						<a href="/signUp" class="btn_hover btn_hover_two">Sign Up</a>
+					<%}%>
+				
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================banner Area =================-->
+<%- include('../includes/timer') %>
+<!--================banner Area =================-->
+<section class="about_area section_gap">
+	<div class="container">
+		<div class="section_title text-center">
+			<h2>Welcome to AGCM UCC</h2>
+			<p>Assemblies of God Campus ministry, University of Cape coast </p>
+		</div>
+		<div class="row">
+			<div class="col-md-6 d_flex">
+				<div class="about_content flex">
+					<h3 class="title_color">Assemblies of God Campus ministry, University of Cape coast</h3>
+					<p><%=about.details.substring(0,350)%>...</p>
+					<a href="/about" class="about_btn btn_hover">Read Full Story</a>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<img src="image/about.jpg" alt="agcm logo">
+			</div>
+		</div>
+	</div>
+</section>
+<!--================About Area =================-->
+
+<!--================Sermons work Area =================-->
+<section class="sermons_work_area section_gap">
+	<div class="container">
+		<div class="section_title text-center">
+			<h2>Sermons This Week</h2>
+			<p>The French Revolution constituted for the conscience of the dominant aristocratic class a fall from</p>
+		</div>
+		<div class="sermons_slider owl-carousel">
+			
+			<div class="item row">
+				<div class="col-lg-8">
+					<div class="sermons_image">
+						<img src="/sermonUploads/<%=sermon.imagename%>" alt="">
+						<p><%=sermon.message.substring(0,150)%>...</p>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="sermons_content">
+						<h3 class="title_color"><%=sermon.title%>
+						</h3>
+						<ul class="list_style sermons_category">
+							<li><i class="lnr lnr-user"></i><span>Speaker: </span><strong><%=sermon.Name%></strong></li>
+							<li><i class="lnr lnr-calendar-full"></i><span>Date:</span> <%=sermon.date%></li>
+						</ul>
+						<a href="/sermon" class="btn_hover btn_hover_two">View More Details</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+<!--================Sermons work Area=================-->
+<!--================Donate Area=================-->
+<section class="donate_area">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 d-flex align-self-center">
+				<div class="donate_content ">
+					<h2>Are you an Alumni <br>of AGCM UCC</h2>
+					<p>Are you part of the Alumni group? Click on the link to join the Alumi page of AGCM</p>
+					
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="donation_form">
+					<h3>Click here to join</h3>
+					<a href="/signUpAlum" class="btn_hover btn_hover_two mb-4">Join Now</a>
+					<h3>click on the links below to join AGCM UCC Alumni social media pages</h3>
+					<div class="footer-social text-center mt-0 ">
+						<a href="#"><i class="fa fa-facebook pr-1"></i></a>
+						<a href="#"><i class="fa fa-instagram pr-1"></i></a>
+						<a href="#"><i class="fa fa-whatsapp pr-1"></i></a>
+						<a href="#"><i class="fa fa-telegram pr-1"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--================Donate Area=================-->
+
+<!--================Event Blog Area=================-->
+<section class="event_blog_area section_gap">
+	<div class="container">
+		<div class="section_title text-center">
+			<h2>Upcoming Events</h2>
+			<p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast</p>
+		</div>
+		<div class="row">
+		<% dataAll.forEach(function(dataAll){%>
+			<div class="col-md-4 mb-20">
+				<div class="event_post">
+					<img src="/eventUploads/<%=dataAll.image%>" alt="">
+					<a href="#">
+						<h2 class="event_title"><%=dataAll.title%></h2>
+					</a>
+					<ul class="list_style sermons_category event_category">
+						<li><i class="lnr lnr-user"></i><%=dataAll.date%></li>
+						<li><i class="lnr lnr-location"></i><%=dataAll.location%></li>
+						<li><i class="lnr lnr-apartment"></i><%=dataAll.time%> to <%=dataAll.time_end%> </li>
+					</ul>
+					<a href="/event-details/<%=dataAll._id%>" class="btn_hover">View Details</a>
+				</div>
+			</div>
+			<%})%>
+		
+		</div>
+		
+	</div>
+</section>
+<%- include('../includes/footer') %>

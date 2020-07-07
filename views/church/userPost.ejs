@@ -1,0 +1,105 @@
+<%- include('../includes/header') %>
+<%- include('../includes/nav') %>
+
+<!--================Blog Categorie Area =================-->
+
+<!--================Blog Area =================-->
+<section class="blog_area">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8">
+                <div class="blog_left_sidebar">
+                   <%post.forEach(function(post){%>
+                    <article class="row blog_item">
+                       <div class="col-md-3">
+                           <div class="blog_info text-right">
+                                <div class="post_tag">
+                                    <a href="#"><%=post.category%></a>
+                                </div>
+                                <ul class="blog_meta list_style">
+                                    <li><a href="#"><%=post.arthur%><i class="lnr lnr-user"></i></a></li>
+                                    <li><a href="#"><%=post.date.getFullYear()%>/<%=post.date.getMonth()+1%>/<%=post.date.getDate()%><i class="lnr lnr-calendar-full"></i></a></li>
+                                  
+                                </ul>
+                            </div>
+                       </div>
+                        <div class="col-md-9">
+                            <div class="blog_post">
+                                <img src="/postUploads/<%=post.image%>" alt="" style='height: 100%; width: 100%; object-fit: contain'>
+                                <div class="blog_details">
+                                    <a href="blog-single.html"><h2><%=post.title%></h2></a>
+                                    <p><%-post.details.substring(0,250)%>....</p>
+                                    <a href="/blog-details/<%=post._id%>" class="view_btn button_hover">Read More</a>
+                                </div>
+                            </div>
+                            <!-- <button class="btn btn-primary">back</button>    -->
+                        </div>
+                    </article>
+                   <%})%>
+                
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget search_widget">
+                     
+                            <div class="input-group">
+                                <input type="text" class="form-control search-icon" placeholder="Search Posts" id="search-btn">
+                                
+                                <!-- <span class="input-group-btn">
+                                    <a href="#" class=" header-search-icon" title="Search" data-toggle="tooltip" data-placement="bottom"><i class="lnr lnr-magnifier"></i></a>
+                                    <button class="btn btn-default" type="button" id='search-icon'><i class="lnr lnr-magnifier search-icon"></i></button>
+                                </span> -->
+                            </div><!-- /input-group -->
+                       
+                       
+                        <div class="br"></div>
+                    </aside>
+                    <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title">Popular Posts</h3>
+                      <%popularPost.forEach(function(popularPost){%>
+                        <div class="media post_item">
+                            <img width="160px" height="70px" src="/postUploads/<%=popularPost.image%>" alt="post">
+                            <div class="media-body">
+                                <a href="/blog-details/<%=popularPost._id%>"><h3><%=popularPost.title%></h3></a>
+                                <p><%=timeAgo.format(popularPost.date)%></p>
+                            </div>
+                        </div> 
+                       <%})%>
+                        <div class="br"></div>
+                    </aside>
+                    <aside class="single_sidebar_widget ads_widget">
+                        <a href="#"><img class="img-fluid" src="image/blog/add.jpg" alt=""></a>
+                        <div class="br"></div>
+                    </aside>
+                    <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title">Post Catgories</h4>
+                        <ul class="list_style cat-list">
+                          <%allCat.forEach(function(allCat){%>
+                            <li>
+                                <a href="/viewBlogByCategory/<%=allCat.postCategory%>/<%=allCat._id%>" class="d-flex justify-content-between">
+                                    <p><%=allCat.postCategory%></p>
+                                </a>
+                            </li>
+                            <%})%>												
+                        </ul>
+                        <div class="br"></div>
+                    </aside>
+                    <aside class="single-sidebar-widget tag_cloud_widget">
+                        <h4 class="widget_title">Tag Categories</h4>
+                        <ul class="list_style">
+                            <%allCat.forEach(function(allCat){%>
+                                <li><a href="/viewBlogByCategory/<%=allCat.postCategory%>/<%=allCat._id%>"><%=allCat.postCategory%></a></li>
+                                <%})%>		 
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Blog Area =================-->
+
+<%- include('../includes/footer') %>

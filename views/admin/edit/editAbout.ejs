@@ -1,0 +1,40 @@
+<%- include('../../admin-include/header') %>
+<%- include('../../admin-include/sideBar') %>
+<%- include('../../admin-include/nav') %>
+
+<!-- Content Wrapper -->
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- 404 Error Text -->
+            <div class="text-center">
+                <div class="section-top-border">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                        
+                          <h3 class="mb-30 title_color">Edit About page</h3>
+                            <form action="/admin/editAbout/<%= data._id%>" method="post" enctype="multipart/form-data">
+                                <div class="mt-10">
+                                    <textarea class="form-control mb-10" rows="5" name="details" placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'message'" required=""><%=data.details%></textarea>
+                                </div>
+                                <div class="button-group-area mt-40">
+                                    <button type="submit" class="genric-btn primary circle">Edit About Page</button>
+                                    <a href="/admin/viewAllAbout" class="genric-btn danger circle">Cancle</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- End of Main Content -->
+<%- include('../../admin-include/footer') %>

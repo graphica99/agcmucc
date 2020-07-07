@@ -1,0 +1,67 @@
+<%- include('../../admin-include/header') %>
+<%- include('../../admin-include/sideBar') %>
+<%- include('../../admin-include/nav') %>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Post Category</h1>
+    <p class="mb-4">This table displays all the Post categories</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+
+            <% success.forEach(function(message){ %>
+            <div class="alert alert-success text-center"><%= message %></div>
+            <% }) %>
+
+            <% info.forEach(function(info){ %>
+            <div class="alert alert-danger text-center"><%= info %></div>
+            <% }) %>
+
+            <h6 class="m-0 font-weight-bold text-primary">Sermon's Table</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Category</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <% cat.forEach(function(cat){    
+                        %>
+                        <tr>
+                            <td><%=cat.postCategory%></td>
+                            <td><a href="/admin/editCat/<%=cat._id%>" class="btn btn-primary">Edit</a></td>
+                            <td>
+
+                                <a class="btn btn-danger" href="/admin/deleteCat/<%=cat._id%>">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+<!-- delete Announcement Model -->
+<%- include('../../admin-include/footer') %>

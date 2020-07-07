@@ -1,0 +1,41 @@
+<%- include('../../admin-include/header') %>
+<%- include('../../admin-include/sideBar') %>
+<%- include('../../admin-include/nav') %>
+
+<!-- Content Wrapper -->
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- 404 Error Text -->
+            <div class="">
+                <div class="section-top-border">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+
+                            <h3 class="mb-30 title_color text-center">Edit Category</h3>
+                            <form action="/admin/editCat/<%= catSingle._id%>" method="post" enctype="multipart/form-data">
+
+                                <input class="form-control" type="text" name="postCategory" placeholder=" eg Religion"
+                                        onfocus="this.placeholder = ''" onblur="this.placeholder = ' eg Religion'"
+                                        required class="single-input" value="<%=catSingle.postCategory%>">
+                                <div class="button-group-area mt-40 text-center">
+                                    <button type="submit" class="genric-btn primary circle">Edit Category</button>
+                                    <a href="/admin/viewAllPostCategory" class="genric-btn danger circle">Cancle</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- End of Main Content -->
+    <%- include('../../admin-include/footer') %>

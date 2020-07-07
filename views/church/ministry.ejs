@@ -1,0 +1,36 @@
+<%- include('../includes/header') %>
+<%- include('../includes/nav') %>
+<section class="breadcrumb_area br_image">
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">Ministries</h2>
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Ministries</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->
+
+<!--================Event Blog Area=================-->
+<section class="event_blog_area section_gap">
+    <div class="container">
+        <div class="row ministries_info">
+            <%department.forEach(function(department){%>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="event_post">
+                    <img src="/departmentUploads/<%=department.image%>" alt="">
+                    <a href="#"><h2 class="event_title"><%=department.name%></h2></a>
+                    <h4>Department Head: <%=department.department%></h4>
+                    <p><strong>Vision/Mission:</strong></p>
+                    <p> <%=department.details%></p>
+                </div>
+            </div>
+            <%})%>
+        </div>
+    </div>
+</section>
+<!--================Blog Area=================-->
+
+<%- include('../includes/footer') %>
