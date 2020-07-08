@@ -7,6 +7,7 @@ const frontEndMinistry = require('../../controller/church/frontEndMinistry');
 const postController = require("../../controller/church/postController");
 const userController = require('../../controller/church/userController');
 const executiveController = require("../../controller/church/executiveController")
+const constactController = require('../../controller/church/contactController');
 const router = express.Router();
 
 //get related pages for the church Model
@@ -51,7 +52,6 @@ router.get("/blog", postController.pagination);
 router.get("/blog/:pageNum",postController.pagination);
 router.get('/blog-details/:id',postController.viewSinglePost);
 router.get('/viewBlogByCategory/:cat/:id',postController.viewBlogByCategory)
-router.get("/viewBlogByCategory/:cat/:pageNum",postController.pagination);
 router.post('/comment/:postId',postController.addComment);
 // router.post('/loadComment',postController.viewSinglePost)
 router.get('/loadAllComments/:postId', postController.loadComments);
@@ -73,4 +73,7 @@ router.post('/search', postController.search);
 router.get('/executive', executiveController.viewExecutive);
 
 router.post('/getExecutive', executiveController.getExecutive);
+
+//contact route
+router.post('/contact',constactController.contact);
 module.exports = router;

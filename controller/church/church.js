@@ -1,20 +1,29 @@
 const Event = require('../../model/church/Event');
 const About = require('../../model/admin/About');
 const Sermon = require('../../model/admin/Sermon');
+const Announcement = require('../../model/admin/Announcement');
 
 exports.homePage = (req, res) => {
   let event = new Event();
   let about = new About();
   let sermon = new Sermon();
-
+  let announcement = new Announcement();
   event.viewEvent().then((data)=>{ 
     about.viewAbout().then((about)=>{
       sermon.viewSermon().then((sermon)=>{
-        if(req.session.user){
-          res.render("church/index",{data:data[0] , dataAll:data, about:about[0],sermon:sermon[0], user:req.session.user});
-        }else{
-        res.render("church/index",{data:data[0] , dataAll:data, about:about[0],sermon:sermon[0],user:req.session.user});
-        }
+        Announcement.viewAnnouncementCount().then((announcementCount)=>{
+          announcement.viewAnnouncement().then((announcement)=>{
+            if(req.session.user){
+              res.render("church/index",{data:data[0] , dataAll:data, about:about[0],sermon:sermon[0], user:req.session.user,announcementCount:announcementCount,announcement:announcement});
+            }else{
+            res.render("church/index",{data:data[0] , dataAll:data, about:about[0],sermon:sermon[0],user:req.session.user,announcementCount:announcementCount,announcement:announcement});
+            }
+          }).catch((e)=>{
+            console.log(e);
+          })
+        }).catch((e)=>{
+          console.log(e);
+        })
       }).catch((err)=>{
         console.log(err);
       })

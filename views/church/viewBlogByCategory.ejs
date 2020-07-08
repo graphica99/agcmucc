@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="blog_left_sidebar">
-                    <%pagination.posts.forEach(function(post){%>
+                    <%post.forEach(function(post){%>
                     <article class="row blog_item">
                        <div class="col-md-3">
                            <div class="blog_info text-right">
@@ -39,51 +39,10 @@
                         </div>
                     </article>
                    <%})%>
-                    <nav class="blog-pagination justify-content-center d-flex">
-                        <ul class="pagination">
-               
-                            <%if(pagination.pages > 0){%>
-                                <% if (pagination.current == 1) { %>
-                                    <li class="page-item active">
-                                        <a href="/viewBlogByCategory/Technology/1" class="page-link" aria-label="Previous">
-                                            First
-                                        </a>
-                                    </li> 
-                                <% } else { %>
-                                    <!-- <li class="page-item"><a  class="page-link" href="/blog/1"></a></li> -->
-                                <% } %>
-                                <% var i = (Number(pagination.current) > 5 ? Number(pagination.current) - 4 : 1) %>
-                                <% if (i !== 1) { %>
-                                    <li class="page-item"><a class="page-link" >...</a></li>
-                                <% } %>
-                                <% for (; i <= (Number(pagination.current) + 4) && i <= pagination.pages; i++) { %>
-                                    <% if (i == pagination.current) { %>
-                                        <li class="page-item active"><a class="page-link"><%= i %></a></li>
-                                    <% } else { %>
-                                        <li class="page-item "><a class="page-link" href="/viewBlogByCategory/Technology/<%= i %>"><%= i %></a></li>
-                                    <% } %>
-                                    <% if (i == Number(pagination.current) + 4 && i < pagination.pages) { %>
-                                        <li class="disabled page-item"><a class="page-link"> ...</a></li>
-                                    <% } %>
-                                <% } %>
-                                <% if (pagination.current == pagination.pages) { %>
-                                    <li class="page-item disabled">
-                                        <a href="#" class="page-link" aria-label="Next">
-                                            Last
-                                            <!-- <span aria-hidden="true">
-                                                <span class="lnr lnr-chevron-right"></span>
-                                            </span> -->
-                                        </a>
-                                    </li>
-                                <% } else { %>
-                                    <li class="page-item"><a class="page-link" href="/viewBlogByCategory/Technology/<%= pagination.pages %>">Last</a></li>
-                                <% } %>                            
-                            <%}%>
-                        </ul>
-                    </nav>
+                
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4"> 
                 <div class="blog_right_sidebar">
                     <aside class="single_sidebar_widget search_widget">
                         <div class="input-group">
@@ -102,8 +61,7 @@
                             <img width="130px" height="70px" src="/postUploads/<%=popularPost.image%>" alt="post">
                             <div class="media-body">
                                 <a href="/blog-details/<%=popularPost._id%>"><h3><%=popularPost.title%></h3></a>
-                                <p><%=popularPost.date%></p>
-                                <p>2 hours ago</p>
+                                <p><%=timeAgo.format(popularPost.date)%></p>
                             </div>
                         </div> 
                        <%})%>
@@ -120,7 +78,6 @@
                             <li>
                                 <a href="/viewBlogByCategory/<%=allCat.postCategory%>/<%=allCat._id%>" class="d-flex justify-content-between">
                                     <p><%=allCat.postCategory%></p>
-                                    <p>00</p>
                                 </a>
                             </li>
                             <%})%>												

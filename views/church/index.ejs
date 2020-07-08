@@ -8,11 +8,17 @@
                 <div class="banner_content">
                    
 					<%if(user){%>
+						<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+							Announcements <span class="badge badge-light"><%=announcementCount%></span>
+						  </button><br><br>
 						<h6>AGCM UCC</h6>
 						<h1>Keep faith always</h1>
 						<p>Are you a content Creator <%=user.firstName.toUpperCase()%> <%=user.lastName.toUpperCase()%>? <br>Click on the link below and become a Creator</p>
 						<a href="/viewAddPost" class="btn_hover btn_hover_two">Create a Post</a>
 					<%}else{%>
+						<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+							Announcements <span class="badge badge-light"><%=announcementCount%></span>
+						  </button><br><br>
 						<h6>AGCM UCC</h6>
 						<h1>Keep faith always</h1>
 						<p>Welcome to Assemblies of God Campus Ministry, University of Cape Coast<br> Are you a member ? Sign up in the link below</p>
@@ -54,7 +60,7 @@
 	<div class="container">
 		<div class="section_title text-center">
 			<h2>Sermons This Week</h2>
-			<p>The French Revolution constituted for the conscience of the dominant aristocratic class a fall from</p>
+			<p>The sermon that was preached this week</p>
 		</div>
 		<div class="sermons_slider owl-carousel">
 			
@@ -140,4 +146,34 @@
 		
 	</div>
 </section>
+
+<!-- The Modal -->
+<div class="modal modal fade" id="myModal">
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content">
+  
+		<!-- Modal Header -->
+		<div class="modal-header">
+		  <h4 class="modal-title">Announcements</h4>
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+  
+		<!-- Modal body -->
+		<div class="modal-body">
+		<%announcement.forEach(function(announcement){%>
+		 <h5><%=announcement.title%></h5>
+		 <p><%=announcement.details%></p>
+		 <hr>
+		 <%})%>
+		
+		</div>
+  
+		<!-- Modal footer -->
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		</div>
+  
+	  </div>
+	</div>
+  </div>
 <%- include('../includes/footer') %>

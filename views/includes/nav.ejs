@@ -1,6 +1,7 @@
 <header class="header_area">
     <div class="header_top">
         <div class="container">
+        
             <div class="row">
                 <div class="col-sm-6 col-5">
                     <ul class="nav social_icon mr-2">
@@ -14,6 +15,7 @@
                     </ul>
                    
                 </div>
+                
                 <div class="col-sm-6 col-7">
                     <div class="top_btn d-flex justify-content-end ">
                         <%if(user){%>
@@ -21,6 +23,7 @@
                             <a href="/logOut"  style="color:orange">Logout</a>
                         <%}else{%>
                             <a href="/login">Login</a>
+                            <a href="/signUp" style="color:orange">Sign Up</a>
                         <%}%>
                     </div>
                 </div>
@@ -40,6 +43,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                 <ul class="nav navbar-nav menu_nav ml-auto">
+                  
                     <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/ministry">Minisrtries</a></li>
                     <li class="nav-item"><a class="nav-link" href="/sermon">Sermons</a></li>
@@ -47,7 +51,7 @@
                     <li class="nav-item"><a class="nav-link" href="/gallary">Gallery</a></li>    
                     <li class="nav-item"><a class="nav-link" href="/executive">Executives</a></li>
 
-                    <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li> -->
                     <li class="nav-item"><a class="nav-link" href="/event">Event</a></li>
                     <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
     

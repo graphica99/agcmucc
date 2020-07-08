@@ -243,6 +243,7 @@ exports.viewSinglePost = (req, res) => {
 
 //!!PAGINATION FOR VIEW CATEGORY
 exports.viewBlogByCategory = (req, res) => {
+  
   let post = new Post();
   let postCategory = new PostCategory();
   // post.viewPost().then((post) => {
@@ -254,17 +255,21 @@ exports.viewBlogByCategory = (req, res) => {
           Post.viewAllCat()
             .then((allCat) => {
               Post.paginationCate(req.params.cat,req.params.pageNum).then((pagination)=>{
+                // console.log(pagination.posts)
               if (post.length) {
                 res.render("church/viewBlogByCategory", {
                   post: post,
                   popularPost: popularPost,
                   allCat: allCat,
                   pagination:pagination,
+                  timeAgo:timeAgo,
                 });
               } else {
                 res.render("church/noPost", {
                   popularPost: popularPost,
                   allCat: allCat,
+                  format:format,
+                  timeAgo:timeAgo,
                 });
               }
             }).catch((err)=> console.log(err));
@@ -282,6 +287,7 @@ exports.viewBlogByCategory = (req, res) => {
       console.log(err);
     });
 };
+
 // views: views,
 exports.pagination = function(req,res){
   let post = new Post();
@@ -291,13 +297,10 @@ exports.pagination = function(req,res){
       Post.popularPost()
         .then((popularPost) => {
           Post.viewAllCat()
-            .then((allCat) => {
-            
-              
+            .then((allCat) => {  
               Post.pagination(req.params.pageNum).then((pagination)=>{
               res.render("church/blog", {
                 post: post,
-             
                 popularPost: popularPost,
                 allCat: allCat,
                 timeAgo:timeAgo,

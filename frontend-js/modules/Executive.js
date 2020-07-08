@@ -43,7 +43,7 @@ export default class Executive {
                border-radius: 50%;">
            </div>
            <div class="content">
-               <h3>${data.name}</h3>
+               <h3>${data.name.toUpperCase()}</h3>
                <p>${data.portfolio}</p>
            </div>
        </div>

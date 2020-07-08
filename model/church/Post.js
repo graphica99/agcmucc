@@ -267,7 +267,7 @@ Post.viewAllPostCount = function () {
     if (postCount) {
       resolve(postCount);
     } else {
-      reject();
+      resolve(0)
     }
   });
 };
@@ -281,7 +281,7 @@ Post.viewAllPostCountUnapproved = function () {
     if (postCount) {
       resolve(postCount);
     } else {
-      reject();
+      resolve(0)
     }
   });
 };
@@ -500,16 +500,15 @@ Post.pagination = function (pageNum) {
   });
 };
 //!!PAGINATION FOR VIEW CATEGORY
-Post.paginationCate = function (pageCat, pageNum) {
+Post.paginationCate = function (pageCat,pageNum) {
   return new Promise(async (resolve, reject) => {
     let perPage = 5;
     let page = pageNum || 1;
-    let product = await postDatabaseController
-      .find()
+    let product = await postDatabaseController.find()
       .skip(perPage * page - perPage);
     // .limit(perPage);
     let rawProdunct = await postDatabaseController
-      .find()
+      .find({ approvePost: "true", category:pageCat})
       .skip(perPage * page - perPage)
       .limit(perPage)
       .toArray();

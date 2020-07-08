@@ -67,6 +67,17 @@ Announcement.prototype.viewAnnouncement = function () {
   });
 };
 
+Announcement.viewAnnouncementCount = function () {
+  return new Promise(async (resolve, reject) => {
+    let results = await announcementDatabaseController.find({}).count();
+    if (results) {
+      resolve(results);
+    } else {
+      resolve(0);
+    }
+  });
+};
+
 Announcement.prototype.viewAnnouncementById = function (id) {
   return new Promise(async (resolve, reject) => {
     let results = await announcementDatabaseController.findOne({

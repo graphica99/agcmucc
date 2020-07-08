@@ -109,7 +109,7 @@ User.prototype.allBirthdayCelebCount = function(){
     if(users){
       resolve(users);
     }else{
-      resolve(users);
+      resolve(0);
     }
   })
 }
@@ -271,7 +271,7 @@ User.prototype.allUsersAlumCount = function(){
     if(users){
       resolve(users)
     }else{
-      resolve(users)
+      resolve(0)
     }
   })
 }
@@ -282,7 +282,7 @@ User.prototype.allUsersCount = function(){
     if(usersCount){
       resolve(usersCount)
     }else{
-      resolve(usersCount)
+      resolve(0)
     }
   })
 }

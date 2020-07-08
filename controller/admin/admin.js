@@ -1,6 +1,7 @@
 const Executive = require("../../model/admin/Executive");
 const User = require('../../model/church/User');
 const Post = require('../../model/church/Post');
+const Contact = require('../../model/church/Contact');
 const e = require("express");
 exports.adminHomePage = (req, res) => {
   //TODO: a. number of users , b. number of aluminus, c. number of post d. number unapproved post
@@ -11,11 +12,14 @@ exports.adminHomePage = (req, res) => {
       user.allUsersAlumCount().then((alumCount)=>{
         //!!CHANGE THE PERMISSION TO TURE 
         user.allBirthdayCelebCount().then((bdayCount)=>{
-          if(req.session.user.isAdmin === false){
-            res.render("admin/index",{count:count,postCount:postCount,postCountUnapproved:postCountUnapproved,alumCount:alumCount,bdayCount:bdayCount});
-            }else{
-              res.redirect('/');
-            }
+          Contact.viewContactCount().then((messageCount)=>{
+            if(req.session.user.isAdmin === false){
+              res.render("admin/index",{count:count,postCount:postCount,postCountUnapproved:postCountUnapproved,alumCount:alumCount,bdayCount:bdayCount,messageCount:messageCount});
+              }else{
+                res.redirect('/');
+              }
+          }).catch((e)=>console.log(e));
+         
         }).catch((e)=>console.log(e));
       }).catch((e)=>console.log(e));
       }).catch((e)=>console.log(e));
@@ -65,6 +69,23 @@ exports.tablePageBday = (req,res) => {
   });
 }
 
+exports.tablePageMessage = (req,res)=>{
+  // console.log('dsf')
+  let contact = new Contact();
+ contact.viewContacts().then((message)=>{
+     res.render("admin/viewAll/allContacts",{message:message});
+  }).catch((e)=>{
+    console.log(e);
+  });
+}
+
+
+exports.deleteContact = (req,res) => {
+  Contact.delectMessage(req.params.id).then((del)=>{
+    req.flash('info','contact delected successfully');
+    res.redirect('/admin/allMessage')
+  }).catch((e)=>{console.log(e)});
+}
 exports.sermonPage = (req, res) => {
   res.render("admin/sermon");
 };

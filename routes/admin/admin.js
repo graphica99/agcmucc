@@ -22,6 +22,10 @@ router.get("/allUsers", adminController.tablePage);
 
 router.get("/allAlum", adminController.tablePageAlum);
 
+router.get("/allMessage", adminController.tablePageMessage);
+
+router.get('/deleteContact/:id',adminController.deleteContact)
+
 router.get('/allBirthdayCeleb', adminController.tablePageBday);
 
 router.get("/sermon", adminController.sermonPage);
@@ -35,6 +39,8 @@ router.get("/announcement", adminController.announcementPage);
 router.get("/about", adminController.aboutPage);
 
 router.get("/executive", adminController.executivePage);
+
+
 
 // **********SERMON ROUTES*********//
 //get routes for sermon

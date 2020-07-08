@@ -8,9 +8,6 @@ const ObjectID = require("mongodb").ObjectID;
 const { isEmpty } = require("../../public/helperFunctions/helpFunctions");
 const path = require("path");
 const fs = require("fs");
-const compress_images = require('compress-images');
-var INPUT_path_to_your_images = `${path.join(__dirname, "../../asset/executiveUploads")}/*.{jpg,JPG,jpeg,JPEG,png,svg,gif}`;
-var OUTPUT_path = path.join(__dirname, "../../asset/try");
 
 class Executive {
   constructor(data, file) {
@@ -18,25 +15,7 @@ class Executive {
     this.success = [];
     this.data = data;
     this.file = file; 
-    this.compress();
-    console.log(OUTPUT_path)
-    // console.log(path.join(__dirname, "../../asset/executiveUploads/"))
   }
-
-  compress(){
-    compress_images( INPUT_path_to_your_images, OUTPUT_path, {compress_force: false, statistic: true, autoupdate: true}, false,
-    {jpg: {engine: 'mozjpeg', command: ['-quality', '60']}},
-    {png: {engine: 'pngquant', command: ['--quality=20-50']}},
-    {svg: {engine: 'svgo', command: '--multipass'}},
-    {gif: {engine: 'gifsicle', command: ['--colors', '64', '--use-col=web']}}, function(error, completed, statistic){
-console.log('-------------');
-console.log(error);
-console.log(completed);
-console.log(statistic);
-console.log('-------------');                                   
-});
-  }
-
 }
 
 Executive.prototype.validate = function () {
@@ -173,6 +152,7 @@ Executive.prototype.editExecutive = function (id) {
           portfolio: this.data.portfolio,
           contact: this.data.contact,
           yearGroup: this.data.yearGroup,
+          image: this.data.image,
         },
       }
     );
