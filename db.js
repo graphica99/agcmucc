@@ -9,5 +9,5 @@ MongoClient.connect(process.env.CONNECTIONSTRING,function (err, db) {
   module.exports = dbo;
 
   let app = require("./app");
-  app.listen(process.env.PORT);
+  app.listen(process.env.PORT || 3000);
 });

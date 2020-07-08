@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "npm-run-all --parallel watch wp-server",
-    "start": "webpack-dev-server",
+    "start": "node db.js",
     "watch": "nodemon db",
     "test": "echo \"Error: no test specified\" && exit 1",
     "wp-server": "webpack --watch"
