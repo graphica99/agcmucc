@@ -1,7 +1,0 @@
-File from: [/asset/executiveUploads/.{jpg,JPG,jpeg,JPEG,png,svg,gif}]
-
-File to: [/asset/try/.{jpg,JPG,jpeg,JPEG,png,svg,gif}]
-
-Compression algorithm: [-]
-
-Description: File does not exist!

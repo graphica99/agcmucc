@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "npm-run-all --parallel watch wp-server",
-    "start": "node db.js",
+    "start": "nodemon app.js",
     "watch": "nodemon db",
     "test": "echo \"Error: no test specified\" && exit 1",
     "wp-server": "webpack --watch"
@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.1.7-alpha.3",
     "express-session": "^1.17.1",
+    "express-session-sequelize": "^2.3.0",
     "gifsicle": "^5.1.0",
     "imagemin": "^7.0.1",
     "javascript-time-ago": "^2.0.7",
@@ -37,9 +38,11 @@
     "mongo-connect": "0.0.6",
     "mongodb": "^3.5.6",
     "move-file": "^2.0.0",
+    "mysql2": "^2.2.5",
     "nodemon": "^2.0.3",
     "nodemon-webpack-plugin": "^4.3.2",
     "pngquant-bin": "^6.0.0",
+    "sequelize": "^6.3.5",
     "socket.io": "^2.3.0",
     "thousands-counter": "^2.1.0",
     "tinify": "^1.6.0-beta.2",

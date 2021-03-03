@@ -1,7 +1,0 @@
-File from: [/asset/executiveUploads/]
-
-File to: [/asset/try]
-
-Compression algorithm: [-]
-
-Description: File does not exist!

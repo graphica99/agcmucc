@@ -23,7 +23,7 @@
             <div class="item row">
                 <div class="col-lg-8">
                     <div class="sermons_image">
-                        <img src="/sermonUploads/<%=sermonOfTheWeek.imagename%>" alt="">
+                        <img src="/sermonUploads/<%=sermonOfTheWeek.image%>" alt="">
                         <p><%=sermonOfTheWeek.message%></p>
                     </div>
                 </div>
@@ -31,11 +31,11 @@
                     <div class="sermons_content">
                         <h3 class="title_color"><%=sermonOfTheWeek.title%></h3>
                         <ul class="list_style sermons_category">
-                            <li><i class="lnr lnr-user"></i><span>Speaker: </span><%=sermonOfTheWeek.Name%></li>
+                            <li><i class="lnr lnr-user"></i><span>Speaker: </span><%=sermonOfTheWeek.name%></li>
                             <li><i class="lnr lnr-calendar-full"></i><span>Date:</span><%=sermonOfTheWeek.date%></li>
                             
                         </ul>
-                        <a href="/sermon-details/<%=sermonOfTheWeek._id%>" class="btn_hover">View Details</a>
+                        <a href="/sermon-details/<%=sermonOfTheWeek.id%>" class="btn_hover">View Details</a>
                     </div>
                 </div>
             </div>
@@ -52,13 +52,13 @@
             <%sermon.forEach(function(sermon){%>
             <div class="col-md-4">
                 <div class="event_post">
-                    <img src="/sermonUploads/<%=sermon.imagename%>" alt="">
+                    <img src="/sermonUploads/<%=sermon.image%>" alt="">
                     <a href="#"><h2 class="event_title"><%=sermon.title%></h2></a>
                     <ul class="list_style sermons_category">
-                        <li><i class="lnr lnr-user"></i><%=sermon.Name%></li>
+                        <li><i class="lnr lnr-user"></i><%=sermon.name%></li>
                         <li><i class="lnr lnr-calendar-full"></i><%=sermon.date%></li>
                     </ul>
-                    <a href="/sermon-details/<%=sermon._id%>" class="btn_hover">View Details</a>
+                    <a href="/sermon-details/<%=sermon.id%>" class="btn_hover">View Details</a>
                 </div>
             </div>
             <%})%>

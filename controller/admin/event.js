@@ -1,11 +1,20 @@
 const Event = require("../../model/admin/Event");
-
-
+const fs = require("fs");
 exports.addEvent = (req, res) => {
-  const event = new Event(req.body, req.files);
-  event
-    .addEvent()
+  let filename = Math.random(0, 1) + req.files.file.name;
+  Event.create({
+    title: req.body.title,
+    location: req.body.location,
+    details: req.body.details,
+    image: filename,
+    date: req.body.date,
+    time: req.body.time,
+    time_end: req.body.time_end,
+  })
     .then((success) => {
+      req.files.file.mv("./asset/eventUploads/" + filename, (err) => {
+        if (err) throw err;
+      });
       req.flash("success", "New event was successfully created.");
       res.redirect("/admin/event");
     })
@@ -15,9 +24,7 @@ exports.addEvent = (req, res) => {
 };
 
 exports.viewAllEventPage = (req, res) => {
-  const event = new Event();
-  event
-    .viewEvent()
+  Event.findAll()
     .then((event) => {
       res.render("admin/viewAll/event", { event: event });
     })
@@ -27,9 +34,7 @@ exports.viewAllEventPage = (req, res) => {
 };
 
 exports.viewEditEvent = (req, res) => {
-  const event = new Event();
-  event
-    .viewEventById(req.params.id)
+  Event.findOne({ where: { id: req.params.id } })
     .then((data) => {
       res.render("admin/edit/editEvent", { data: data });
     })
@@ -39,11 +44,23 @@ exports.viewEditEvent = (req, res) => {
 };
 
 exports.editEvent = (req, res) => {
-  const event = new Event(req.body,req.files);
-  console.log(req.params.id);
-  event
-    .editEvent(req.params.id)
+  let filename = Math.random(0, 1) + req.files.file.name;
+  Event.update(
+    {
+      title: req.body.title,
+      location: req.body.location,
+      details: req.body.details,
+      image: filename,
+      date: req.body.date,
+      time: req.body.time,
+      time_end: req.body.time_end,
+    },
+    { where: { id: req.params.id } }
+  )
     .then((result) => {
+      req.files.file.mv("./asset/eventUploads/" + filename, (err) => {
+        if (err) throw err;
+      });
       req.flash("success", "event Updated Successfully");
       res.redirect("/admin/viewAllEvent");
     })
@@ -52,15 +69,28 @@ exports.editEvent = (req, res) => {
     });
 };
 
+// exports.deleteEvent = (req, res) => {
+//   Event.destroy({ where: { id: req.params.id } })
+//     .then((results) => {
+//       req.flash("info", "event deleted Successfully");
+//       res.redirect("/admin/viewAllEvent");
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// };
+
 exports.deleteEvent = (req, res) => {
-  const event = new Event();
-  event
-    .deleteEvent(req.params.id)
-    .then((results) => {
+  Event.findOne({ where: { id: req.params.id } })
+    .then((data) => {
+      return data.destroy();
+    })
+    .then((delData) => {
+      fs.unlink("./asset/eventUploads/" + delData.image, (err) => {
+        console.log("department image deleted successfully");
+      });
       req.flash("info", "event deleted Successfully");
       res.redirect("/admin/viewAllEvent");
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((e) => console.log(e));
 };

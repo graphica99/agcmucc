@@ -1,12 +1,9 @@
-const eventDatabaseController = require("../../db")
-  .db("agcm")
-  .collection("event");
-const ObjectID = require("mongodb").ObjectID;
+const Events = require("../../model/admin/Event");
 const fs = require("fs");
 const path = require("path");
-const format = require('date-format');
+const format = require("date-format");
 class Event {
-  constructor(){
+  constructor() {
     this.deleteDate = false;
   }
 }
@@ -23,48 +20,44 @@ Event.prototype.viewEvent = function () {
       getHour,
       fullTime,
       getDay;
-    mysort = { date: 1, time: 1 };
-    results = await eventDatabaseController.find().sort(mysort).toArray();
+    results = await Events.findAll({
+      order: [
+        ["date", "ASC"],
+        ["time", "ASC"],
+      ],
+    });
 
     currentDate = new Date();
-    fullDate = format.asString('yyyy-MM-dd',currentDate);
-    // fullYear = currentDate.getFullYear();
-    // getMonth = currentDate.getMonth();
-    // if (getMonth <= 9) {
-    //   getMonth = `0${getMonth + 1}`;
-    // } else {
-    //   getMonth = `${getMonth + 1}`;
-    // }
-    // getDay = currentDate.getDate();
-    // fullDate = `${fullYear}-${getMonth}-${getDay}`;
-    // getHour = currentDate.getUTCHours();
-    // getMinutes = currentDate.getUTCMinutes();
-    // fullTime = `${getHour + 1}:${getMinutes}`;
+    fullDate = format.asString("yyyy-MM-dd", currentDate);
 
-    fullTime = format.asString('hh:mm',currentDate);
+    fullTime = format.asString("hh:mm", currentDate);
+    // let fullTimeBackEnd = format.asString("hh:mm", results[0].time_end);
     // console.log(results.length);
-    if(results.length < 1 || results.length == 0){
-       this.deleteDate = false;
-    }else{
+    if (results.length < 1 || results.length == 0) {
+      this.deleteDate = false;
+    } else {
       this.deleteDate = true;
     }
-    // console.log(fullDate >= results[0].date)
-    // console.log(fullTime >= results[0].time_end);
-    // console.log(this.deleteDate)
-    // console.log(results.length)
-    // console.log(fullDate);
-    // console.log(results[0].date)
-    // console.log(fullTime)
-    // console.log(results[0].time_end)
-    // console.log(this.deleteDate)
-    // console.log(results[0]._id)
-    if (fullDate >= results[0].date && fullTime >= results[0].time_end && this.deleteDate) {
+
+    // console.log("fulltime =======" + fullTime);
+    // console.log("fullDate =======" + fullDate);
+    // console.log("backend fulltime" + fullTimeBackEnd);
+    // console.log("backend fullDate" + results[0].date);
+
+    if (
+      fullDate >= results[0].date &&
+      fullTime >= results[0].time_end &&
+      this.deleteDate
+    ) {
       let uploadDir = path.join(__dirname, "../../asset/eventUploads/");
-      let deleteItem = await eventDatabaseController.findOneAndDelete({
-        _id: new ObjectID(results[0]._id),
+      let deleteItem = await Events.destroy({
+        where: { id: results[0].id },
       });
+      console.log(
+        "event delete========================================" + deleteItem
+      );
       if (deleteItem) {
-        fs.unlink(uploadDir + deleteItem.value.image, (err) => {
+        fs.unlink(uploadDir + results[0].image, (err) => {
           resolve("Event was deleted Successfully");
         });
       }
@@ -72,7 +65,7 @@ Event.prototype.viewEvent = function () {
     if (results) {
       resolve(results);
     } else {
-      reject("couldnt view all pages");
+      reject(`couldn't view all pages`);
     }
   });
 };

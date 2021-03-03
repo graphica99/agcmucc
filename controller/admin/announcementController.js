@@ -1,10 +1,7 @@
 const Announcement = require("../../model/admin/Announcement");
 
-
 exports.addAnnouncement = (req, res) => {
-  const announcement = new Announcement(req.body, req.files);
-  announcement
-    .addAnnouncement()
+  Announcement.create({ title: req.body.title, details: req.body.details })
     .then((success) => {
       req.flash("success", "New Announcement was successfully created.");
       res.redirect("/admin/announcement");
@@ -15,9 +12,7 @@ exports.addAnnouncement = (req, res) => {
 };
 
 exports.viewAllAnnouncementPage = (req, res) => {
-  const announcement = new Announcement();
-  announcement
-    .viewAnnouncement()
+  Announcement.findAll()
     .then((Announcement) => {
       res.render("admin/viewAll/announcement", { Announcement: Announcement });
     })
@@ -27,9 +22,7 @@ exports.viewAllAnnouncementPage = (req, res) => {
 };
 
 exports.viewEditAnnouncement = (req, res) => {
-  const announcement = new Announcement();
-  announcement
-    .viewAnnouncementById(req.params.id)
+  Announcement.findOne({ where: { id: req.params.id } })
     .then((data) => {
       res.render("admin/edit/editAnnouncement", { data: data });
     })
@@ -39,9 +32,15 @@ exports.viewEditAnnouncement = (req, res) => {
 };
 
 exports.editAnnouncement = (req, res) => {
-  const announcement = new Announcement(req.body,req.files);
-  announcement
-    .editAnnouncement(req.params.id)
+  Announcement.update(
+    {
+      title: req.body.title,
+      details: req.body.details,
+    },
+    {
+      where: { id: req.params.id },
+    }
+  )
     .then((result) => {
       req.flash("success", "Announcement Updated Successfully");
       res.redirect("/admin/viewAllAnnouncement");
@@ -52,9 +51,7 @@ exports.editAnnouncement = (req, res) => {
 };
 
 exports.deleteAnnouncement = (req, res) => {
-  const announcement = new Announcement();
-  announcement
-    .deleteAnnouncement(req.params.id)
+  Announcement.destroy({ where: { id: req.params.id } })
     .then((results) => {
       req.flash("info", "Announcement deleted Successfully");
       res.redirect("/admin/viewAllAnnouncement");

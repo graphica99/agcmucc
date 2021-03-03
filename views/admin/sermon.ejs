@@ -7,18 +7,22 @@
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
 
+  
     <!-- Main Content -->
     <div id="content">
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
             <!-- 404 Error Text -->
             <div class="text-center">
                 <div class="section-top-border">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
-                            <% success.forEach(function(message){ %>
-                            <div class="alert alert-success text-center"><%= message %></div>
+                            <!-- if success .... -->
+                               <% success.forEach(function(message){ %>
+                                <div class="alert alert-success text-center"><%= message %></div>
+                                <% }) %>
+                                  <% info.forEach(function(info){ %>
+                             <div class="alert alert-danger text-center"><%= info %></div>
                             <% }) %>
                             <h3 class="mb-30 title_color">Add Sermon</h3>
                             <form action="/admin/sermon" method="post" enctype="multipart/form-data">
@@ -28,7 +32,7 @@
                                         class="single-input">
                                 </div>
                                 <div class="mt-10">
-                                    <input class="form-control" type="text" name="Name" placeholder="Name of Speaker"
+                                    <input class="form-control" type="text" name="name" placeholder="Name of Speaker"
                                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name of Speaker'"
                                         required class="single-input">
                                 </div>

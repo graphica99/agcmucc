@@ -1,11 +1,30 @@
-const executiveDatabaseController = require("../../db")
-  .db("agcm")
-  .collection("executive");
-const yearGroupDatabaseController = require("../../db")
-  .db("agcm")
-  .collection("yearGroup");
-const ObjectID = require("mongodb").ObjectID;
-const { isEmpty } = require("../../public/helperFunctions/helpFunctions");
+const Sequelize = require("sequelize");
+const sequelize = require("../../db");
+
+const executive = sequelize.define("Executive", {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  },
+  name: Sequelize.STRING,
+  portfolio: Sequelize.STRING,
+  contact: Sequelize.TEXT,
+  yearGroup: Sequelize.STRING,
+  image: Sequelize.STRING,
+});
+
+const yearGroup = sequelize.define("yearGroup", {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  },
+  yearGroup: Sequelize.STRING,
+});
+
 const path = require("path");
 const fs = require("fs");
 
@@ -14,7 +33,7 @@ class Executive {
     this.error = [];
     this.success = [];
     this.data = data;
-    this.file = file; 
+    this.file = file;
   }
 }
 
@@ -46,22 +65,22 @@ Executive.prototype.cleanUp = function () {
   if (typeof this.data.yearGroup != "string") {
     this.data.yearGroup = "";
   }
- 
-  if (!isEmpty(this.file)) {
+
+  if (this.file) {
     let file = this.file.file;
-    let filename = Math.random(0, 1)+file.name;
-    file.mv("./asset/executiveUploads/"+filename, (err) => {
+    let filename = Math.random(0, 1) + file.name;
+    file.mv("./asset/executiveUploads/" + filename, (err) => {
       if (err) throw err;
     });
     this.data = {
-    name: this.data.name,
-    portfolio: this.data.portfolio,
-    contact: this.data.contact,
-    yearGroup: this.data.yearGroup,
-    image: filename,
+      name: this.data.name,
+      portfolio: this.data.portfolio,
+      contact: this.data.contact,
+      yearGroup: this.data.yearGroup,
+      image: filename,
     };
     // console.log(this.data.image);
-   } else {
+  } else {
     this.error.push("Please select an Image");
   }
 };
@@ -70,43 +89,54 @@ Executive.prototype.addExecutive = function () {
   return new Promise(async (resolve, reject) => {
     this.validate();
     this.cleanUp();
-    let post = await executiveDatabaseController.insertOne(this.data);
+    let post = await executive.create(this.data);
     if (post) {
       this.success.push("New Executive Added successfully");
       resolve(this.success);
     } else {
-      reject(this.error); 
+      reject(this.error);
     }
   });
 };
 
-Executive.viewByYearGroup = function(){
-   return new Promise(async (resolve,rejec) => {
-    let yearGroup = await executiveDatabaseController.find({yearGroup:'2016/2017'}).toArray();
-    if(yearGroup){
+Executive.prototype.viewExecutiveByYearGroup = function (yearG) {
+  return new Promise(async (resolve, reject) => {
+    let post = await executive.findAll({ where: { yearGroup: yearG } });
+    if (post) {
+      resolve(post);
+    } else {
+      reject(`couldn't fetch all data`);
+    }
+  });
+};
+Executive.prototype.viewByYearGroup = function () {
+  return new Promise(async (resolve, reject) => {
+    let yearGroup = await yearGroup.findOne({
+      where: { yearGroup: "2016/2017" },
+    });
+    if (yearGroup) {
       resolve(yearGroup);
-    }else{
+    } else {
       reject();
     }
-   });
-}
+  });
+};
 
-Executive.viewYearGroup = function(year){
-  return new Promise(async (resolve,rejec) => {
-    let yearGroup = await executiveDatabaseController.find({yearGroup:year}).toArray();
-    if(yearGroup){
-      // console.log(yearGroup)
-      resolve(yearGroup);
-    }else{
-      reject();
-    }
-   });
-}
+// Executive.prototype.viewYearGroup = function (year) {
+//   return new Promise(async (resolve, reject) => {
+//     let yearGroup = await yearGroup.findAll({ where: { yearGroup: year } });
+//     if (yearGroup) {
+//       // console.log(yearGroup)
+//       resolve(yearGroup);
+//     } else {
+//       reject();
+//     }
+//   });
+// };
 
 Executive.prototype.viewExecutive = function () {
   return new Promise(async (resolve, reject) => {
-    let results = await executiveDatabaseController.find({}).toArray();
-    let resultsYeargroup = await yearGroupDatabaseController.find({}).toArray();
+    let results = await executive.findAll();
     if (results) {
       //   console.log( resolve(results,resultsYeargroup));
       resolve(results);
@@ -118,7 +148,7 @@ Executive.prototype.viewExecutive = function () {
 
 Executive.prototype.viewYearGroup = function () {
   return new Promise(async (resolve, reject) => {
-    let resultsYeargroup = await yearGroupDatabaseController.find({}).toArray();
+    let resultsYeargroup = await yearGroup.findAll();
     if (resultsYeargroup) {
       resolve(resultsYeargroup);
     } else {
@@ -129,8 +159,8 @@ Executive.prototype.viewYearGroup = function () {
 
 Executive.prototype.viewExecutiveById = function (id) {
   return new Promise(async (resolve, reject) => {
-    let results = await executiveDatabaseController.findOne({
-      _id: new ObjectID(id),
+    let results = await executive.findOne({
+      where: { id: id },
     });
     if (results) {
       resolve(results);
@@ -144,16 +174,16 @@ Executive.prototype.editExecutive = function (id) {
   return new Promise(async (resolve, reject) => {
     this.validate();
     this.cleanUp();
-    let updateResult = await executiveDatabaseController.findOneAndUpdate(
-      { _id: new ObjectID(id) },
+    let updateResult = await executive.update(
       {
-        $set: {
-          name: this.data.name,
-          portfolio: this.data.portfolio,
-          contact: this.data.contact,
-          yearGroup: this.data.yearGroup,
-          image: this.data.image,
-        },
+        name: this.data.name,
+        portfolio: this.data.portfolio,
+        contact: this.data.contact,
+        yearGroup: this.data.yearGroup,
+        image: this.data.image,
+      },
+      {
+        where: { id: id },
       }
     );
     if (updateResult) {
@@ -167,15 +197,12 @@ Executive.prototype.editExecutive = function (id) {
 Executive.prototype.deleteExecutive = function (id) {
   return new Promise(async (resolve, reject) => {
     let uploadDir = path.join(__dirname, "../../asset/executiveUploads/");
-    
-    let post = await executiveDatabaseController.findOneAndDelete({
-      _id: new ObjectID(id),
-    });
-    fs.unlink(uploadDir+post.value.image, (err) => {
-      resolve("Executive was deleted Successfully");
-    });
-  });
 
+    let post = await executive.destroy({
+      where: { id: id },
+    });
+    resolve("Executive was deleted Successfully");
+  });
 
   // return new Promise(async (resolve, reject) => {
   //   let post = await executiveDatabaseController.findOneAndDelete({
@@ -189,15 +216,14 @@ Executive.prototype.deleteExecutive = function (id) {
   // });
 };
 
-Executive.prototype.addYearGroup = function (id) {
+Executive.prototype.addYearGroup = function (yeargroup) {
   return new Promise(async (resolve, reject) => {
-    let yearGroup = id.yearGroup;
     // let previousGroup = await yearGroupDatabaseController.findOne({
     //   yearGroup: yearGroup,
     // });
 
-    let post = await yearGroupDatabaseController.insertOne({
-      yearGroup: yearGroup,
+    let post = await yearGroup.create({
+      yearGroup: yeargroup,
     });
 
     if (post) {
@@ -205,16 +231,6 @@ Executive.prototype.addYearGroup = function (id) {
     } else {
       reject();
     }
-
-    // console.log(previousGroup.yearGroup);
-
-    // if (previousGroup.yearGroup == yearGroup) {
-    //     console.log(yearGroup);
-    //     console.log("couldnt add");
-    //     console.log('......')
-    // } else {
-
-    // }
   });
 };
 module.exports = Executive;

@@ -1,13 +1,24 @@
+const Executive = require("../../model/admin/Executive");
 const Sermon = require("../../model/admin/Sermon");
-const { response } = require("express");
-
+const fs = require("fs");
 exports.addSermon = (req, res) => {
-  const sermon = new Sermon(req.body, req.files);
-  sermon
-    .addSermon()
+  // console.log(req.body);
+  let filename = Math.random(0, 1) + req.files.file.name;
+  Sermon.create({
+    title: req.body.title,
+    name: req.body.name,
+    message: req.body.message,
+    image: filename,
+    date: req.body.date,
+  })
     .then((success) => {
-      req.flash("success", "New Sermon was successfully created.");
-      res.redirect("/admin/sermon");
+      req.files.file.mv("./asset/sermonUploads/" + filename, (err) => {
+        if (err) throw err;
+      });
+      req.session.save(function () {
+        req.flash("success", "New Sermon was successfully created.");
+        res.redirect("/admin/sermon");
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -15,9 +26,7 @@ exports.addSermon = (req, res) => {
 };
 
 exports.viewAllSermonPage = (req, res) => {
-  const sermon = new Sermon();
-  sermon
-    .viewSermon()
+  Sermon.findAll()
     .then((sermon) => {
       res.render("admin/viewAll/sermon", { sermon: sermon });
     })
@@ -27,9 +36,7 @@ exports.viewAllSermonPage = (req, res) => {
 };
 
 exports.viewEditSermon = (req, res) => {
-  const sermon = new Sermon();
-  sermon
-    .viewSermonById(req.params.id)
+  Sermon.findOne({ where: { id: req.params.id } })
     .then((data) => {
       res.render("admin/edit/editSermon", { data: data });
     })
@@ -39,27 +46,43 @@ exports.viewEditSermon = (req, res) => {
 };
 
 exports.editSermon = (req, res) => {
-  const sermon = new Sermon(req.body, req.files);
-  sermon
-    .editSermon(req.params.id)
+  let filename = Math.random(0, 1) + req.files.file.name;
+  console.log(req.body);
+  Sermon.update(
+    {
+      title: req.body.title,
+      name: req.body.Name,
+      message: req.body.message,
+      image: filename,
+      date: req.body.date,
+    },
+    { where: { id: req.params.id } }
+  )
     .then((result) => {
+      console.log(result);
+      req.files.file.mv("./asset/sermonUploads/" + filename, (err) => {
+        if (err) throw err;
+      });
       req.flash("success", "Sermon Updated Successfully");
       res.redirect("/admin/viewAllSermon");
     })
     .catch((err) => {
+      console.log("error======================" + err);
       res.redirect("/admin/404");
     });
 };
 
 exports.deleteSermon = (req, res) => {
-  const sermon = new Sermon();
-  sermon
-    .deleteSermon(req.params.id)
-    .then((results) => {
+  Sermon.findOne({ where: { id: req.params.id } })
+    .then((data) => {
+      return data.destroy();
+    })
+    .then((delData) => {
+      fs.unlink("./asset/sermonUploads/" + delData.image, (err) => {
+        console.log("department image deleted successfully");
+      });
       req.flash("info", "Sermon deleted Successfully");
       res.redirect("/admin/viewAllSermon");
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((e) => console.log(e));
 };

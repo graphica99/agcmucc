@@ -4,7 +4,6 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Sermon's</h1>
     <p class="mb-4">This table displays all the sermon in AGCM</p>
@@ -14,13 +13,13 @@
         <div class="card-header py-3">
 
             <% success.forEach(function(message){ %>
-            <div class="alert alert-success text-center"><%= message %></div>
-            <% }) %>
-
-            <% info.forEach(function(info){ %>
-            <div class="alert alert-danger text-center"><%= info %></div>
-            <% }) %>
-
+                <div class="alert alert-success text-center"><%= message %></div>
+                <% }) %>
+    
+                <% info.forEach(function(info){ %>
+                <div class="alert alert-danger text-center"><%= info %></div>
+                <% }) %>
+    
             <h6 class="m-0 font-weight-bold text-primary">Sermon's Table</h6>
         </div>
         <div class="card-body">
@@ -54,16 +53,16 @@
                         %>
                         <tr>
                             <td><%=sermon.title%></td>
-                            <td><%=sermon.Name%></td>
-                            <td><%=sermon.title%>...</td>
-                            <td><img width="140px" height="60px" src="/sermonUploads/<%=sermon.imagename%>" alt="<%=sermon.title%>">
+                            <td><%=sermon.name%></td>
+                            <td><%=sermon.message%>...</td>
+                            <td><img width="140px" height="60px" src="/sermonUploads/<%=sermon.image%>" alt="<%=sermon.title%>">
                             </td>
                             <td><%=sermon.date%>
                             </td>
-                            <td><a href="/admin/editSermon/<%=sermon._id%>" class="btn btn-primary">Edit</a></td>
+                            <td><a href="/admin/editSermon/<%=sermon.id%>" class="btn btn-primary">Edit</a></td>
                             <td>
 
-                                <a class="btn btn-danger" href="/admin/deleteSermon/<%=sermon._id%>">
+                                <a class="btn btn-danger" href="/admin/deleteSermon/<%=sermon.id%>">
                                     Delete
 
                                 </a>

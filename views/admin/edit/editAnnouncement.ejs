@@ -19,7 +19,7 @@
                         <div class="col-lg-12 col-md-12">
                         
                           <h3 class="mb-30 title_color">Edit Announcement</h3>
-                            <form action="/admin/editAnnouncement/<%= data._id%>" method="post" enctype="multipart/form-data">
+                            <form action="/admin/editAnnouncement/<%= data.id%>" method="post" enctype="multipart/form-data">
 
                                 <div class="mt-10">
                                     <input  class="form-control" type="text" name="title" placeholder="title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'title'" required class="single-input" value="<%=data.title%>">
@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="button-group-area mt-40">
                                     <button type="submit" class="genric-btn primary circle">Edit Event</button>
-                                    <a href="/admin/viewAllAnnouncement" class="genric-btn danger circle">Cancle</a>
+                                    <a href="/admin/viewAllAnnouncement" class="genric-btn danger circle">Cancel</a>
                                 </div>
                             </form>
                         </div>

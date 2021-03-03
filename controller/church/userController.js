@@ -1,12 +1,8 @@
 const User = require("../../model/church/User");
 const Department = require("../../model/admin/Department");
-const Event = require("../../model/church/Event");
-const About = require("../../model/admin/About");
-const Sermon = require("../../model/admin/Sermon");
+
 exports.signUpPage = (req, res) => {
-  let department = new Department();
-  department
-    .viewDepartment()
+  Department.findAll()
     .then((department) => {
       res.render("church/signUp", { department: department });
     })
@@ -14,9 +10,7 @@ exports.signUpPage = (req, res) => {
 };
 
 exports.signUpAlumPage = (req, res) => {
-  let department = new Department();
-  department
-    .viewDepartment()
+  Department.findAll()
     .then((department) => {
       res.render("church/signUpAlum", { department: department });
     })
@@ -32,15 +26,15 @@ exports.logIn = (req, res) => {
   user
     .login()
     .then(function (result) {
+      console.log("results-------------------------------" + result.isAdmin);
       req.session.user = {
-        firstName: user.data.firstName,
-        lastName: user.data.lastName,
-        id: user.data._id,
-        isAdmin: user.data.isAdmin,
-        isAlum: user.data.isAlum
+        firstName: result.firstName,
+        lastName: result.lastName,
+        id: result.id,
+        isAdmin: result.isAdmin,
       };
       req.session.save(function () {
-        res.redirect("/viewAddPost");
+        res.redirect("/");
       });
     })
     .catch((e) => {
@@ -51,28 +45,75 @@ exports.logIn = (req, res) => {
     });
 };
 
-exports.signUp = (req, res) => {
+exports.signUp = async (req, res) => {
+  console.log(req.body.isAlum);
   let user = new User(req.body);
   user
     .register()
-    .then(function (result) {
+    .then((result) => {
+      // console.log(result);
       req.session.user = {
-        firstName: user.data.firstName,
-        lastName: user.data.lastName,
-        id: user.data._id,
-        isAdmin: user.data.isAdmin
+        firstName: result.dataValues.firstName,
+        lastName: result.dataValues.lastName,
+        id: result.dataValues.id,
+        isAdmin: result.dataValues.isAdmin,
       };
       req.session.save(function () {
+        req.flash("success", "Account created successfully");
         res.redirect("/");
       });
     })
     .catch((e) => {
+      console.log("errror============================" + e);
       req.flash("error", e);
       req.session.save(function () {
         res.redirect("/signUp");
       });
     });
 };
+// exports.signUp = async (req, res) => {
+//   let salt = bycrypt.genSaltSync(10);
+//   let hashFirstPass = bycrypt.hashSync(req.body.firstPassword, salt);
+//   let hashSecondPass = bycrypt.hashSync(req.body.secondPassword, salt);
+//   User.create({
+//     firstName: req.body.firstName,
+//     lastName: req.body.lastName,
+//     email: req.body.email,
+//     firstPassword: hashFirstPass,
+//     secondPassword: hashSecondPass,
+//     department: req.body.department.toString(),
+//     entryYear: format.asString("yyyy", new Date(req.body.entryYear)),
+//     endingYear: format.asString("yyyy", new Date(req.body.endingYear)),
+//     yearOfStudy: req.body.yearOfStudy,
+//     program: req.body.program,
+//     residence: req.body.residence,
+//     level: req.body.level,
+//     contact: req.body.contact,
+//     isAdmin: false,
+//     isAlum: false,
+//     doB: format.asString("MM-dd", new Date(req.body.doB)),
+//     gender: req.body.gender,
+//   })
+//     .then((result) => {
+//       req.session.user = {
+//         firstName: result.dataValues.firstName,
+//         lastName: result.dataValues.lastName,
+//         id: result.dataValues.id,
+//         isAdmin: result.dataValues.isAdmin,
+//       };
+//       req.session.save(function () {
+//         req.flash("success", "Account created successfully");
+//         res.redirect("/");
+//       });
+//     })
+//     .catch((e) => {
+//       console.log(e);
+//       req.flash("error", e);
+//       req.session.save(function () {
+//         res.redirect("/signUp");
+//       });
+//     });
+// };
 
 exports.signUpAlum = (req, res) => {
   let user = new User(req.body);
@@ -84,10 +125,13 @@ exports.signUpAlum = (req, res) => {
         lastName: user.data.lastName,
         id: user.data._id,
         isAdmin: user.data.isAdmin,
-        isAlum: user.data.isAlum 
+        isAlum: user.data.isAlum,
       };
       req.session.save(function () {
-        req.flash('success','Congratulations! You have been added to the Alumi page.')
+        req.flash(
+          "success",
+          "Congratulations! You have been added to the Alumi page."
+        );
         res.redirect("/signUpAlum");
       });
     })

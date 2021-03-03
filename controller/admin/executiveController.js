@@ -1,15 +1,14 @@
 const Executive = require("../../model/admin/Executive");
 
 exports.addExecutive = (req, res) => {
-  const executive = new Executive(req.body, req.files);
-  // console.log(req.files)
-  // console.log(req.body)
-  executive.addExecutive()
+  let executive = new Executive(req.body, req.files);
+  executive
+    .addExecutive()
     .then((success) => {
       req.flash("success", "New Executive was successfully created.");
       res.redirect("/admin/Executive");
     })
-    .catch((err) => { 
+    .catch((err) => {
       console.log(err);
     });
 };
@@ -26,7 +25,7 @@ exports.viewAllExecutivePage = (req, res) => {
       console.log(err);
     });
 };
- 
+
 exports.viewEditExecutive = (req, res) => {
   const executive = new Executive();
   executive
@@ -66,9 +65,12 @@ exports.deleteExecutive = (req, res) => {
 };
 
 exports.addYearGroup = (req, res) => {
+  // console.log(
+  //   "year group----------------------------------------" + req.body.yearGroup
+  // );
   const executive = new Executive(req.body);
   executive
-    .addYearGroup(req.body)
+    .addYearGroup(req.body.yearGroup)
     .then((yeargroup) => {
       req.flash("success", "Year group added successful");
       res.redirect("/admin/executive");

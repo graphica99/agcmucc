@@ -6,26 +6,27 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="banner_content">
-                   
-					<%if(user){%>
-						<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
-							Announcements <span class="badge badge-light"><%=announcementCount%></span>
-						  </button><br><br>
-						<h6>AGCM UCC</h6>
-						<h1>Keep faith always</h1>
-						<p>Are you a content Creator <%=user.firstName.toUpperCase()%> <%=user.lastName.toUpperCase()%>? <br>Click on the link below and become a Creator</p>
-						<a href="/viewAddPost" class="btn_hover btn_hover_two">Create a Post</a>
-					<%}else{%>
-						<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
-							Announcements <span class="badge badge-light"><%=announcementCount%></span>
-						  </button><br><br>
-						<h6>AGCM UCC</h6>
-						<h1>Keep faith always</h1>
-						<p>Welcome to Assemblies of God Campus Ministry, University of Cape Coast<br> Are you a member ? Sign up in the link below</p>
-						<a href="/signUp" class="btn_hover btn_hover_two">Sign Up</a>
-					<%}%>
-				
-                </div>
+					<!-- if user herer -->
+					 <%if(user){%>
+						 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+							 Announcements <span class="badge badge-light"><%=announcementCount%></span>
+						   </button><br><br>
+						 <h4>WELCOME TO AGCM UCC</h4>
+						 <h1>Keep faith always</h1>
+						 <!-- <p>Are you a content Creator <%=user.firstName.toUpperCase()%> <%=user.lastName.toUpperCase()%>? <br>Click on the link below and become a Creator</p> -->
+						 <!-- <a href="/viewAddPost" class="btn_hover btn_hover_two">Create a Post</a> -->
+					 <%}else{%>
+						 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+							 Announcements <span class="badge badge-light"><%=announcementCount%></span>
+						   </button><br><br>
+						 <h6>AGCM UCC</h6>
+						 <h1>Keep faith always</h1>
+						 <p>Welcome to Assemblies of God Campus Ministry, University of Cape Coast<br> Are you a member ? Sign up with the link below</p>
+						 <a href="/signUp" class="btn_hover btn_hover_two">Sign Up</a>
+					 <%}%>
+				 
+				 </div>
+ 
             </div>
         </div>
     </div>
@@ -48,7 +49,7 @@
 				</div>
 			</div>
 			<div class="col-md-6">
-				<img src="image/about.jpg" alt="agcm logo">
+				<img src="image/agcmabout.jpg" alt="image">
 			</div>
 		</div>
 	</div>
@@ -67,7 +68,7 @@
 			<div class="item row">
 				<div class="col-lg-8">
 					<div class="sermons_image">
-						<img src="/sermonUploads/<%=sermon.imagename%>" alt="">
+						<img src="/sermonUploads/<%=sermon.image%>" alt="">
 						<p><%=sermon.message.substring(0,150)%>...</p>
 					</div>
 				</div>
@@ -76,7 +77,7 @@
 						<h3 class="title_color"><%=sermon.title%>
 						</h3>
 						<ul class="list_style sermons_category">
-							<li><i class="lnr lnr-user"></i><span>Speaker: </span><strong><%=sermon.Name%></strong></li>
+							<li><i class="lnr lnr-user"></i><span>Speaker: </span><strong><%=sermon.name%></strong></li>
 							<li><i class="lnr lnr-calendar-full"></i><span>Date:</span> <%=sermon.date%></li>
 						</ul>
 						<a href="/sermon" class="btn_hover btn_hover_two">View More Details</a>
@@ -105,10 +106,10 @@
 					<a href="/signUpAlum" class="btn_hover btn_hover_two mb-4">Join Now</a>
 					<h3>click on the links below to join AGCM UCC Alumni social media pages</h3>
 					<div class="footer-social text-center mt-0 ">
-						<a href="#"><i class="fa fa-facebook pr-1"></i></a>
-						<a href="#"><i class="fa fa-instagram pr-1"></i></a>
-						<a href="#"><i class="fa fa-whatsapp pr-1"></i></a>
-						<a href="#"><i class="fa fa-telegram pr-1"></i></a>
+						<a href="https://web.facebook.com/Official_Agcm_Ucc-101634157945996/"><i class="fa fa-facebook pr-1"></i></a>
+						<a href="https://www.instagram.com/official_agcm_ucc/"><i class="fa fa-instagram pr-1"></i></a>
+						<!-- <a href="#"><i class="fa fa-whatsapp pr-1"></i></a> -->
+						<a href="#"><i class="fa fa-paper-plane pr-1"></i></a>
 					</div>
 				</div>
 			</div>
@@ -122,7 +123,7 @@
 	<div class="container">
 		<div class="section_title text-center">
 			<h2>Upcoming Events</h2>
-			<p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast</p>
+			<!-- <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast</p> -->
 		</div>
 		<div class="row">
 		<% dataAll.forEach(function(dataAll){%>

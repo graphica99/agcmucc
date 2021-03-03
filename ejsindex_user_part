@@ -1,0 +1,26 @@
+
+    <%if(user){%>
+                        <a href="/viewAddPost" class="mr-2">My Account</a>
+                        <a href="/logOut" style="color:orange">Logout</a>
+                        <%}else{%>
+                        <a href="/login">Login</a>
+                        <a href="/signUp" style="color:orange">Sign Up</a>
+                        <%}%>
+
+
+
+				//nnave banner_content
+				   
+
+
+						time
+					
+
+
+						<% success.forEach(function(message){ %>
+                            <div class="alert alert-success text-center"><%= message %></div>
+                            <% }) %>
+
+							  <% info.forEach(function(info){ %>
+            <div class="alert alert-danger text-center"><%= info %></div>
+            <% }) %>

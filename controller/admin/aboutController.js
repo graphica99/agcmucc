@@ -1,24 +1,24 @@
 const About = require("../../model/admin/About");
 
 exports.addAbout = (req, res) => {
-  const about = new About(req.body, req.files);
-  about
-    .addAbout()
-    .then((success) => {
+  const body = req.body.details;
+  About.create({
+    details: body,
+  })
+    .then((results) => {
       req.flash("success", "New About was successfully created.");
       res.redirect("/admin/About");
+      console.log(results);
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((error) => {
+      console.log(error);
     });
 };
 
 exports.viewAllAboutPage = (req, res) => {
-  const about = new About();
-  about
-    .viewAbout()
-    .then((About) => {
-      res.render("admin/viewAll/About", { About: About });
+  About.findAll()
+    .then((about) => {
+      res.render("admin/viewAll/about", { About: about });
     })
     .catch((err) => {
       console.log(err);
@@ -26,9 +26,7 @@ exports.viewAllAboutPage = (req, res) => {
 };
 
 exports.viewEditAbout = (req, res) => {
-  const about = new About();
-  about
-    .viewAboutById(req.params.id)
+  About.findOne({ where: { id: req.params.id } })
     .then((data) => {
       res.render("admin/edit/editAbout", { data: data });
     })
@@ -38,14 +36,24 @@ exports.viewEditAbout = (req, res) => {
 };
 
 exports.editAbout = (req, res) => {
-  const about = new About(req.body,req.files);
-  about
-    .editAbout(req.params.id)
-    .then((result) => {
+  // console.log("about body===========================" + req.body.details);
+  // console.log("about body===========================" + req.params.id);
+  About.update({ details: req.body.details }, { where: { id: req.params.id } })
+    .then((data) => {
       req.flash("success", "About Updated Successfully");
       res.redirect("/admin/viewAllAbout");
     })
     .catch((err) => {
       res.redirect("/admin/404");
     });
+  // const about = new About(req.body, req.files);
+  // about
+  //   .editAbout(req.params.id)
+  //   .then((result) => {
+  //     req.flash("success", "About Updated Successfully");
+  //     res.redirect("/admin/viewAllAbout");
+  //   })
+  //   .catch((err) => {
+  //     res.redirect("/admin/404");
+  //   });
 };

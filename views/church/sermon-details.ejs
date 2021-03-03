@@ -3,9 +3,9 @@
 <section class="breadcrumb_area br_image">
     <div class="container">
         <div class="page-cover text-center">
-            <h2 class="page-cover-tittle">Event Details</h2>
+            <h2 class="page-cover-tittle">Sermon Details</h2>
             <ol class="breadcrumb">
-                <li class="active">Details about this event</li>
+                <li class="active">Details about sermon</li>
             </ol>
         </div>
     </div>
@@ -15,12 +15,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <img class="img-fluid" src="/sermonUploads/<%=sermonSingle.imagename%>" alt="">
+                <img class="img-fluid" src="/sermonUploads/<%=sermonSingle.image%>" alt="">
             </div>
             <div class="col-md-4 align-self-center">
                 <ul class="list_style sermons_category event_category">
                     <li><i class="lnr lnr-calendar-full"></i><%=sermonSingle.date%></li>
-                    <li><i class="lnr lnr-user"></i>By: <%=sermonSingle.Name%></li>
+                    <li><i class="lnr lnr-user"></i>By: <%=sermonSingle.name%></li>
                     <!-- <li><i class="lnr lnr-location"></i>Santa monica, Los Angeles, USA</li> -->
                 </ul>
             </div>

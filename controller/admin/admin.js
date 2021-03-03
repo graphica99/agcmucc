@@ -1,32 +1,49 @@
 const Executive = require("../../model/admin/Executive");
-const User = require('../../model/church/User');
-const Post = require('../../model/church/Post');
-const Contact = require('../../model/church/Contact');
+const User = require("../../model/church/User");
+const Post = require("../../model/church/Post");
+const Contact = require("../../model/church/Contact");
 const e = require("express");
 exports.adminHomePage = (req, res) => {
   //TODO: a. number of users , b. number of aluminus, c. number of post d. number unapproved post
   let user = new User();
-  user.allUsersCount().then((count)=>{
-    Post.viewAllPostCount().then((postCount)=>{
-      Post.viewAllPostCountUnapproved().then((postCountUnapproved)=>{
-      user.allUsersAlumCount().then((alumCount)=>{
-        //!!CHANGE THE PERMISSION TO TURE 
-        user.allBirthdayCelebCount().then((bdayCount)=>{
-          Contact.viewContactCount().then((messageCount)=>{
-            if(req.session.user.isAdmin === false){
-              res.render("admin/index",{count:count,postCount:postCount,postCountUnapproved:postCountUnapproved,alumCount:alumCount,bdayCount:bdayCount,messageCount:messageCount});
-              }else{
-                res.redirect('/');
-              }
-          }).catch((e)=>console.log(e));
-         
-        }).catch((e)=>console.log(e));
-      }).catch((e)=>console.log(e));
-      }).catch((e)=>console.log(e));
-    }).catch((e)=>console.log(e));
-  }).catch((e)=>{console.log(e)});
+  let contact = new Contact();
+  user
+    .allUsersCount()
+    .then((count) => {
+      user
+        .allUsersAlumCount()
+        .then((alumCount) => {
+          ////!!CHANGE THE PERMISSION TO TURE
+          user
+            .allBirthdayCelebCount()
+            .then((bdayCount) => {
+              Contact.viewContactCount()
+                .then((messageCount) => {
+                  if (req.session.user.isAdmin) {
+                    console.log(
+                      "/*/*/*/*/**/**/**/*===========" +
+                        req.session.user.isAdmin
+                    );
+                    res.render("admin/index", {
+                      count: count.count,
+                      alumCount: alumCount.count,
+                      bdayCount: bdayCount.count,
+                      messageCount: messageCount.count,
+                    });
+                  } else {
+                    res.redirect("/");
+                  }
+                })
+                .catch((e) => console.log(e));
+            })
+            .catch((e) => console.log(e));
+        })
+        .catch((e) => console.log(e));
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 };
-
 
 exports.erroPage = (req, res) => {
   res.render("admin/404");
@@ -42,50 +59,65 @@ exports.loginPage = (req, res) => {
 //! VIEW ALL USERS.
 exports.tablePage = (req, res) => {
   let user = new User();
-  user.allUsers().then((users)=>{
-     res.render("admin/allUsers",{users:users});
-  }).catch((e)=>{
-    console.log(e);
-  });
+  user
+    .allUsers()
+    .then((users) => {
+      res.render("admin/allUsers", { users: users });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 };
 
 //!VIEW ALL ALUM
-exports.tablePageAlum = (req,res) =>{
+exports.tablePageAlum = (req, res) => {
   let user = new User();
-  user.allUsersAlum().then((users)=>{
-     res.render("admin/allAlum",{users:users});
-  }).catch((e)=>{
-    console.log(e);
-  });
-}
+  user
+    .allUsersAlum()
+    .then((users) => {
+      res.render("admin/allAlum", { users: users });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
 
 //! ALL BDAY CELEB
-exports.tablePageBday = (req,res) => {
+exports.tablePageBday = (req, res) => {
   let user = new User();
-  user.allBirthdayCeleb().then((users)=>{
-     res.render("admin/viewAll/allBirthdayCeleb",{users:users});
-  }).catch((e)=>{
-    console.log(e);
-  });
-}
+  user
+    .allBirthdayCeleb()
+    .then((users) => {
+      res.render("admin/viewAll/allBirthdayCeleb", { users: users });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
 
-exports.tablePageMessage = (req,res)=>{
+exports.tablePageMessage = (req, res) => {
   // console.log('dsf')
   let contact = new Contact();
- contact.viewContacts().then((message)=>{
-     res.render("admin/viewAll/allContacts",{message:message});
-  }).catch((e)=>{
-    console.log(e);
-  });
-}
+  contact
+    .viewContacts()
+    .then((message) => {
+      res.render("admin/viewAll/allContacts", { message: message });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
 
-
-exports.deleteContact = (req,res) => {
-  Contact.delectMessage(req.params.id).then((del)=>{
-    req.flash('info','contact delected successfully');
-    res.redirect('/admin/allMessage')
-  }).catch((e)=>{console.log(e)});
-}
+exports.deleteContact = (req, res) => {
+  Contact.delectMessage(req.params.id)
+    .then((del) => {
+      req.flash("info", "contact delected successfully");
+      res.redirect("/admin/allMessage");
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
 exports.sermonPage = (req, res) => {
   res.render("admin/sermon");
 };

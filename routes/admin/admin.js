@@ -7,8 +7,8 @@ const departmentController = require("../../controller/admin/departmentControlle
 const announcementController = require("../../controller/admin/announcementController");
 const aboutController = require("../../controller/admin/aboutController");
 const executiveController = require("../../controller/admin/executiveController");
-const postController = require("../../controller/admin/postController");
-const { route } = require("../church/church");
+// const postController = require("../../controller/admin/postController");
+
 //************ GET ROUTES FOR ADMIN VIEWS**********/
 router.get("/", adminController.adminHomePage);
 
@@ -24,9 +24,9 @@ router.get("/allAlum", adminController.tablePageAlum);
 
 router.get("/allMessage", adminController.tablePageMessage);
 
-router.get('/deleteContact/:id',adminController.deleteContact)
+router.get("/deleteContact/:id", adminController.deleteContact);
 
-router.get('/allBirthdayCeleb', adminController.tablePageBday);
+router.get("/allBirthdayCeleb", adminController.tablePageBday);
 
 router.get("/sermon", adminController.sermonPage);
 
@@ -39,8 +39,6 @@ router.get("/announcement", adminController.announcementPage);
 router.get("/about", adminController.aboutPage);
 
 router.get("/executive", adminController.executivePage);
-
-
 
 // **********SERMON ROUTES*********//
 //get routes for sermon
@@ -55,34 +53,34 @@ router.post("/sermon", sermonController.addSermon);
 
 router.post("/editSermon/:id", sermonController.editSermon);
 
-//*******************EVENTS ROUTES****************/
-//get routes for events
+// //*******************EVENTS ROUTES****************/
+// //get routes for events
 router.get("/viewAllEvent", eventController.viewAllEventPage);
 
 router.get("/deleteEvent/:id", eventController.deleteEvent);
 
 router.get("/editEvent/:id", eventController.viewEditEvent);
 
-//post related routes for sermon
+// //post related routes for sermon
 router.post("/event", eventController.addEvent);
 
 router.post("/editEvent/:id", eventController.editEvent);
 
-//**************** DEPARTMENT ROUTES*******************/
-//get routes for departments
+// //**************** DEPARTMENT ROUTES*******************/
+// //get routes for departments
 router.get("/viewAllDepartment", departmentController.viewAllDepartmentPage);
 
 router.get("/deleteDepartment/:id", departmentController.deleteDepartment);
 
 router.get("/editDepartment/:id", departmentController.viewEditDepartment);
 
-//post related routes for department
+// //post related routes for department
 router.post("/department", departmentController.addDepartment);
 
 router.post("/editDepartment/:id", departmentController.editDepartment);
 
-//**************** ANNOUNCEMENTS ROUTES*******************/
-//get routes for announcement
+// //**************** ANNOUNCEMENTS ROUTES*******************/
+// //get routes for announcement
 router.get(
   "/viewAllAnnouncement",
   announcementController.viewAllAnnouncementPage
@@ -98,7 +96,7 @@ router.get(
   announcementController.viewEditAnnouncement
 );
 
-//post related routes for announcement
+// //post related routes for announcement
 router.post("/announcement", announcementController.addAnnouncement);
 
 router.post("/editAnnouncement/:id", announcementController.editAnnouncement);
@@ -130,23 +128,23 @@ router.post("/editExecutive/:id", executiveController.editExecutive);
 router.post("/addYearGroup", executiveController.addYearGroup);
 
 //post related routes for Blog
-router.get("/posts", postController.viewPost);
+// router.get("/posts", postController.viewPost);
 
-router.get('/viewAllPostCategory',postController.viewAllPostCategory)
+// router.get("/viewAllPostCategory", postController.viewAllPostCategory);
 
-router.post('/addPostCategory',postController.addPostCategory)
+// router.post("/addPostCategory", postController.addPostCategory);
 
-router.get('/allPost',postController.viewAllPost);
+// router.get("/allPost", postController.viewAllPost);
 
-router.get('/allPostUnapprove', postController.viewAllPostUnapprove)
+// router.get("/allPostUnapprove", postController.viewAllPostUnapprove);
 
-router.post('/approvePost', postController.approvePost);
+// router.post("/approvePost", postController.approvePost);
 
-router.get('/viewPostToApprove/:postID',postController.viewPostToApprove)
+// router.get("/viewPostToApprove/:postID", postController.viewPostToApprove);
 
-router.get('/editCat/:id',postController.viewPostCategoryById)
+// router.get("/editCat/:id", postController.viewPostCategoryById);
 
-router.post('/editCat/:id',postController.editCategory);
+// router.post("/editCat/:id", postController.editCategory);
 
-router.get('/deleteCat/:id',postController.deleteCategory)
+// router.get("/deleteCat/:id", postController.deleteCategory);
 module.exports = router;
